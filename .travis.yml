@@ -8,7 +8,7 @@ before_script:
   - . $HOME/.nvm/nvm.sh
   - nvm install stable
   - nvm use stable
-  - npm install -g less
+  - npm install -g less@2.7.2
   - nikola build
 script:
   - git config --global user.email "travis@edyo.es"
