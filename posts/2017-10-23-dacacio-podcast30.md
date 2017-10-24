@@ -22,26 +22,26 @@ Si os gusta nuestro trabajo por favor corred la voz, dadnos feedback, y valorad 
 
 Enlaces comentados:
 
- * Coursera - https://www.coursera.org/ 
- * Codeacademy - https://www.codecademy.com/ 
- * Safari books online - https://www.safaribooksonline.com/
- * DevOps Weekly - http://www.devopsweekly.com/ 
- * DB Weekly - https://dbweekly.com/ 
- * Changelog Weekly - https://changelog.com/weekly
- * Hacker News  - https://thehackernews.com/
- * O’Reilly - https://www.oreilly.com/
- * Pragmatic Prog  - https://pragprog.com/
- * Python Weekly - https://www.pythonweekly.com/
- * Software engineering daily - https://softwareengineeringdaily.com/
- * We developers - http://wedevelopers.com/
- * Mixx.io - https://mixx.io/
- * Hacia falta - https://haciafalta.com/ 
- * Mossega la poma - https://mossegalapoma.cat/
- * Programar.cloud - https://programar.cloud/ 
- * Think wasabi - http://thinkwasabi.com/  
- * Desarrollo profesional - https://pantaloni.es/category/podcast/
- * Una al día - http://unaaldia.hispasec.com/
- * David Bonilla - http://bonillaware.us2.list-manage.com/
- * DevOps Weekly - http://www.devopsweekly.com/
- * Coursera - https://www.coursera.org/ 
- * Packtpub - https://www.packtpub.com/packt/offers/free-learning
+ * [Coursera](https://www.coursera.org/)
+ * [Codeacademy](https://www.codecademy.com/)
+ * [Safari books online](https://www.safaribooksonline.com/)
+ * [DevOps Weekly](http://www.devopsweekly.com/)
+ * [DB Weekly](https://dbweekly.com/)
+ * [Changelog Weekly](https://changelog.com/weekly)
+ * [Hacker News](https://thehackernews.com/)
+ * [O’Reilly](https://www.oreilly.com/)
+ * [Pragmatic Prog](https://pragprog.com/)
+ * [Python Weekly](https://www.pythonweekly.com/)
+ * [Software engineering daily](https://softwareengineeringdaily.com/)
+ * [We developers](http://wedevelopers.com/)
+ * [Mixx.io](https://mixx.io/)
+ * [Hacia falta](https://haciafalta.com/)
+ * [Mossega la poma](https://mossegalapoma.cat/)
+ * [Programar.cloud](https://programar.cloud/)
+ * [Think wasabi](http://thinkwasabi.com/)
+ * [Desarrollo profesional](https://pantaloni.es/category/podcast/)
+ * [Una al día](http://unaaldia.hispasec.com/)
+ * [David Bonilla](http://bonillaware.us2.list-manage.com/)
+ * [DevOps Weekly](http://www.devopsweekly.com/)
+ * [Coursera](https://www.coursera.org/)
+ * [Packtpub](https://www.packtpub.com/packt/offers/free-learning)
