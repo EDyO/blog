@@ -9,20 +9,23 @@
 
 Hoy tenemos con nosotros a un par de invitados que trabajan en un lugar único en el mundo, donde se dedican a acelerar partículas a velocidades lumínicas y luego a colisionarlas para ver qué pasa. No hay que dar muchas más pistas para que sepáis de qué hablamos, no? Sobretodo cuando en el propio título tenéis el spoiler… estamos hablando del Consejo Europeo para la Investigación Nuclear, más conocido como CERN.
 
-Blog Entredevyops : http://www.entredevyops.es
-Twitter Entredevyops: https://twitter.com/EntreDevYOps
+[Blog Entredevyops](http://www.entredevyops.es)
+
+[Twitter Entredevyops](https://twitter.com/EntreDevYOps)
 
 <!-- TEASER_END -->
 
+Datos de contacto de los entrevistados:
+
+- David ([@damoreno](https://twitter.com/Damoreno) - <david.mogar@cern.ch>)
+- Luis ([@lpigueiras](https://twitter.com/lpigueiras) - <pigueiras@gmail.com>)
+
 Enlaces comentados:
 
-David (@damoreno - david.mogar@cern.ch )
-Luis (@lpigueiras - lpigueiras@gmail.com )
-
-https://about.mattermost.com/
-https://collectd.org/
-https://www.openstack.org/
-https://puppet.com/
-https://gitlab.com/
-https://about.gitlab.com/features/gitlab-ci-cd/
-http://openstack-in-production.blogspot.com.es/
+* [Mattermost](https://about.mattermost.com/)
+* [collectd](https://collectd.org/)
+* [Puppet](https://puppet.com/)
+* [OpenStack](https://www.openstack.org/)
+* [OpenStack in Production](https://openstack-in-production.blogspot.com.es/)
+* [GitLab](https://gitlab.com/)
+* [GitLab CI](https://about.gitlab.com/features/gitlab-ci-cd/)
