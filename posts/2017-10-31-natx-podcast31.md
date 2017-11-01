@@ -7,7 +7,7 @@
 
 <img src='/images/edyo-podcast.png' alt='EDyO Podcast' class='align-right height='110' width='110'/>
 
-Hoy tenemos con nosotros a un par de invitados que trabajan en un lugar único en el mundo, donde se dedican a acelerar partículas a velocidades lumínicas y luego a colisionarlas para ver qué pasa. No hay que dar muchas más pistas para que sepáis de qué hablamos, no? Sobretodo cuando en el propio título tenéis el spoiler… estamos hablando del Consejo Europeo para la Investigación Nuclear, más conocido como CERN.
+Hoy tenemos con nosotros a un par de invitados que trabajan en un lugar único en el mundo, donde se dedican a acelerar partículas a velocidades lumínicas y luego a colisionarlas para ver qué pasa. No hay que dar muchas más pistas para que sepáis de qué hablamos, no? Sobretodo cuando en el propio título tenéis el spoiler… estamos hablando del Consejo Europeo para la Investigación Nuclear, más conocido como CERN. [Escúchalo en nuestro último episodio.](http://podcast.edyo.es/podcast/edyo-31.mp3) 
 
 [Blog Entredevyops](http://www.entredevyops.es)
 
