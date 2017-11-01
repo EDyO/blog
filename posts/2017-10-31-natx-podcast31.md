@@ -17,7 +17,7 @@ Hoy tenemos con nosotros a un par de invitados que trabajan en un lugar único e
 
 Datos de contacto de los entrevistados:
 
-- David ([@damoreno](https://twitter.com/Damoreno) - <david.mogar@cern.ch>)
+- David ([@davidmogar](https://twitter.com/davidmogar) - <david.mogar@cern.ch>)
 - Luis ([@lpigueiras](https://twitter.com/lpigueiras) - <pigueiras@gmail.com>)
 
 Enlaces comentados:
