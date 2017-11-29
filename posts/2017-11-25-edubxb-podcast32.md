@@ -7,7 +7,7 @@
 
 <img src='/images/edyo-podcast.png' alt='EDyO Podcast' class='align-left height='110' width='110'/>
 
-En el [episodio de hoy](http://podcast.edyo.es/podcast/edyo-31.mp3) vamos a hablar de Infraestructura como código (también conocida como IaC).
+En el [episodio de hoy](http://podcast.edyo.es/podcast/edyo-32.mp3) vamos a hablar de Infraestructura como código (también conocida como IaC).
 
 [Blog Entredevyops](http://www.entredevyops.es)
 
