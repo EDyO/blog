@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Reunión de Junio de Sudoers BCN | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/reunion-de-junio-de-sudoers-bcn.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Reunión de Junio de Sudoers BCN">
+            <meta name="og:description" content="Sudoers BCN
+De nuevo, como cada mes, se realizó la reunión del grupo de Sudoers BCN, en la que Jordi Soucheiron habló sobre MongoDB, y Ignacio Torres hizo lo propio sobre Go.
+
+
+
+MongoDB para sysadmins">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Reunión de Junio de Sudoers BCN</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="empresa-moderna-y-los-cambios.html" title="La empresa moderna y los cambios" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="devopsdays-barcelona-2013.html" title="DevOpsDays Barcelona 2013" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Ignasi Fosch</span>
+                el <time class="published" datetime="2013-06-04T20:37:37+02:00">04/06/2013</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/eventos.html"><span class="badge badge-info">Eventos</span></a>
+        <a class="tag p-category" href="../tags/go.html"><span class="badge badge-info">Go</span></a>
+        <a class="tag p-category" href="../tags/mongodb.html"><span class="badge badge-info">MongoDB</span></a>
+        <a class="tag p-category" href="../tags/sudoers-bcn.html"><span class="badge badge-info">Sudoers BCN</span></a>
+    </span>
+
+            </small>
+        </div>
+        <div class="section" id="sudoers-bcn">
+<h2><a class="reference external" href="http://sudoers-barcelona.wikia.com/wiki/Sudoers_Barcelona_Wiki">Sudoers BCN</a></h2>
+<p>De nuevo, como cada mes, se realizó la reunión del grupo de Sudoers BCN, en la que Jordi Soucheiron habló sobre MongoDB, y Ignacio Torres hizo lo propio sobre Go.</p>
+<!-- TEASER_END -->
+</div>
+<div class="section" id="mongodb-para-sysadmins">
+<h2><a class="reference external" href="http://www.slideshare.net/jordixou/mongo-db-22441879">MongoDB para sysadmins</a></h2>
+<p><a class="reference external" href="https://twitter.com/jordixou">Jordi Soucheiron</a> explicó que <a class="reference external" href="http://www.mongodb.org/">MongoDB</a> es una base de datos NoSQL, de <a class="reference external" href="http://www.10gen.com/">10gen</a>, quién también da soporte, orientada a documentos (JSON), con escalado horizontal (sharding) y alta disponibilidad (replicación). Permite actualizaciones atómicas pero no soporta transacciones ni incluye un lenguaje como SQL, puesto que utiliza JSON para realizar las consultas. Algunos de sus principales usos son:</p>
+<ul class="simple">
+<li>Almacenar ficheros, como se haría con S3, aproximadamente,</li>
+<li>Almacenar logs, como, por ejemplo, backend de logstash</li>
+<li>En sistemas de cola, como RabbitMQ..</li>
+<li>Data mining/Big Data, como storage, y herramienta de MapReduce.</li>
+</ul>
+<div class="section" id="despliegues">
+<h3>Despliegues</h3>
+<p>El despliegue de desarrollo es con un sólo nodo, no hay <em>sharding</em> ni <em>HA</em>. El despliegue pequeño tiene un maestro y varios esclavos, de modo que permite HA, pero no hay <em>sharding</em>. Opcionalmente, se puede tener un retraso entre el nivel de actualización de uno de los esclavos para permitir recuperar errores lógicos. Esto debería alcanzar varios miles de inserts por segundo. El despliegue avanzado tiene una composición mucho más compleja: Hay un grupo de servidores, llamados de configuración (<em>config servers</em>) que conocen la ubicación de cada información en cada servidor. Luego hay otros grupos de nodos, separados en <em>shards</em>, que corresponde a cada partición. Estos <em>shards</em> se componen de una instalación basada en el despliegue pequeño, por lo que cada <em>shard</em> es autónomo, altamente disponible y permite tener nodos retrasados. El punto de fallo para un <em>shard</em> es que se estropeen tanto el nodo maestro como los esclavos. Jordi comentó que se habían llegado a hacer instalaciones de 30-40 <em>shards</em>. Además, al poder elegir la clave de distribución, se pueden tener distribuidas las lecturas y escrituras en cada <em>shard</em>. El tipo de replicación es configurable, así como las colecciones que se mantienen en <em>shard</em> y la clave que las distribuye. Los clientes se conectan a un proceso llamado <tt class="docutils literal">mongos</tt> que es el que consulta a los <em>config servers</em> para saber a qué <em>shard</em> y qué nodo debe consultar. La desventaja es que siempre se necesitan tres servidores de configuración y que es una solución bastante más compleja que las otras.</p>
+<p>En cuanto a las copias de seguridad, Jordi explicó que tiene una instrucción que permite volcar los datos a ficheros BSON. Aunque se puede hacer en caliente, ellos lo utilizan en los nodos que tienen retrasados para hacer una copia periódica. Relacionado al rendimiento, Jordi destacó el tamaño de los índices, pero sobretodo recomendó utilizar los <em>update in-place</em> antes que reescribir el documento entero. Para la medida de los documentos, se puede configurar un porcentaje sobre el tamaño original para que se reserve espacio para que el documento pueda crecer, pero comentó que no parece que se utilice mucho. Para la monitorización, utilizan consultas formateadas con JSON sobre uno de los nodos de cada <em>replica-set</em>, que les responde con un resumen del estado. También comentó que existen módulos y guiones para Nagios y otros sistemas similares que lo permiten gestionar con bastante facilidad.</p>
+<p>Finalmente, hizo una demostración en la que, sobre una máquina virtual, instalaba tres nodos de mongoDB que contenían un solo <em>shard</em>, creando tres directorios y arrancando tres procesos mongoDB uno en cada directorio, con tres puertos distintos. Luego, se conectó a uno de los nodos, y, utilizando un documento JSON, lo inicializó. Tras esto, le indicó la existencia de los otros dos nodos y éstos se configuraron y replicaron automáticamente. Con esto hecho, se puede acceder a una interfaz de gestión vía HTTP/REST que permite visualizar el estado del <em>shard</em> y los correspondientes nodos.</p>
+</div>
+</div>
+<div class="section" id="go-y-el-zen-de-python">
+<h2><a class="reference external" href="http://www.tux21b.org/public/go-python-zen.html#1">Go y el Zen de Python</a></h2>
+<p><a class="reference external" href="https://twitter.com/itorres">Ignacio Torres</a> nos introdujo, a partir de la presentación de <a class="reference external" href="http://andrewgerrand.com">Andrew Gerrand</a>, en el mundo de <a class="reference external" href="http://golang.org">Go</a>, un lenguaje de programación que apareció en 2009, con las siguientes características:</p>
+<ul class="simple">
+<li>Simple de leer y aprender.</li>
+<li>Tipado estático pero permitiendo ser usado como dinámico.</li>
+<li>Compilado en código máquina nativo, con un ciclo de desarrollo rápido.</li>
+<li>Funcionalidades especiales para la concurrencia a nivel del lenguaje. Puede interactuar directamente con Erlang.</li>
+<li>Librería estándar con esteroides y expansible.</li>
+<li>Muchas y buenas librerías.</li>
+<li>Código abierto con licencia BSD.</li>
+</ul>
+<p>Algunos usos habituales serían:</p>
+<ul class="simple">
+<li>Demonios de servidor</li>
+<li>Herramientas de línea de comandos</li>
+<li>Aplicaciones web</li>
+<li>Juegos</li>
+<li>Aplicaciones científicas</li>
+</ul>
+<p>Un factor muy importante que Ignacio destacó, es que Go es un lenguaje con sintaxis C, pero sin los peores aspectos de éste, que sigue la filosofía de Python. Hay que destacar que cualquier función puede convertirse en un método de un tipo, añadiéndolo sin necesidad de crear un heredero. Permite múltiples interfaces de forma muy sencilla. No hay <tt class="docutils literal">this</tt> o <tt class="docutils literal">self</tt>, se hace referencia con un nombre elegido en el prototipo del método. La visibilidad de los elementos se define por el uso de mayúsculas y minúsculas. No hay subclases, decoradores, iteradores, excepciones, etcétera. La gestión de errores es explícita. El espacio de nombres de los paquetes es plano. Para reforzar la legibilidad de código, evitando los <em>one-liners</em>, no hay encadenamientos para las listas ni operador condicional ternario.</p>
+<p>En cuanto al despliegue, el resultado de la compilación es un binario enlazado estáticamente, por lo que no hay que preocuparse por las dependencias. En lo relativo a la concurrencia, no hay que preocuparse del bloqueo, puesto que el compilador lo tiene en cuenta, y el código se ejecuta en paralelo con poco coste adicional (no hay GIL).</p>
+</div>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="empresa-moderna-y-los-cambios.html" rel="prev">La empresa moderna y los cambios</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="devopsdays-barcelona-2013.html" rel="next">DevOpsDays Barcelona 2013</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/reunion-de-junio-de-sudoers-bcn.html",
+        disqus_title="Reuni\u00f3n de Junio de Sudoers BCN",
+        disqus_identifier="cache/posts/2013-06-04-natx-sudoers.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>El SLA del Cloud | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/sla-cloud-aws-azure.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="El SLA del Cloud">
+            <meta name="og:description" content="A raíz del incidente de AWS S3 del pasado 28 de Febrero  he oído, y no en pocas ocasiones, frases del estilo “pero esto del cloud no se caía, no?”, “hasta el cloud tiene caídas de servicio” y similare">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">El SLA del Cloud</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="cronica-orchestrate-2017.html" title="Crónica de el Orchestrate 2017" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="podcast-episodio-23.html" title="Podcast 23: Vulnerabilidad de Wordpress, generadores de contenido estáticos y Amazon Drive." rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">David Acacio</span>
+                el <time class="published" datetime="2017-05-17T13:35:00+02:00">17/05/2017</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/aws.html"><span class="badge badge-info">AWS</span></a>
+        <a class="tag p-category" href="../tags/amazon.html"><span class="badge badge-info">Amazon</span></a>
+        <a class="tag p-category" href="../tags/azure.html"><span class="badge badge-info">Azure</span></a>
+        <a class="tag p-category" href="../tags/cloud.html"><span class="badge badge-info">Cloud</span></a>
+        <a class="tag p-category" href="../tags/microsoft.html"><span class="badge badge-info">Microsoft</span></a>
+        <a class="tag p-category" href="../tags/sla.html"><span class="badge badge-info">SLA</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p><img src="https://cloud.githubusercontent.com/assets/2761032/25993765/743e78a4-370b-11e7-9d3d-e8321c7d49c9.jpg" alt="SLA" class="align-left"></p>
+<p>A raíz del incidente de <a href="https://aws.amazon.com/es/message/41926/">AWS S3 del pasado 28 de Febrero</a>  he oído, y no en pocas ocasiones, frases del estilo “pero esto del cloud no se caía, no?”, “hasta el cloud tiene caídas de servicio” y similares. 
+Si hablamos con personas que conozcan que es el cloud seguramente tendrán una opinión similar: una de las ventajas de migrar hacia el cloud es que nunca tendrás caídas de servicio. </p>
+<p>Lamentablemente eso no es del todo verdad y las empresas que ofrecen servicios de cloud lo saben.</p>
+<!-- TEASER_END -->
+
+<p>Si bien es cierto que con un buen diseño de infraestructura podemos minimizar el riesgo de pérdida de servicio, todo proveedor sabe que existe una posibilidad de indisponibilidad y se indica a nivel contractual con el <a href="https://en.wikipedia.org/wiki/Service-level_agreement">SLA</a>. Para mí, el sla es cuánto se fía nuestro proveedor de su infraestructura y el compromiso que está dispuesto a asumir con sus clientes así como las compensaciones (normalmente económicas).</p>
+<p>He querido revisar el SLA ofrecido por los líderes actuales en IaaS, que según gartner son Amazon y Microsoft:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/25993764/743c5f88-370b-11e7-9959-272f9beae788.png" alt="SLA" width="80%" class="align-center"></p>
+<h3>Amazon</h3>
+<blockquote>
+<h4>EC2</h4>
+<p>El popular servicio de máquinas virtuales de Amazon ofrece un <strong><a href="https://aws.amazon.com/es/ec2/sla/">SLA del 99.95%</a></strong>. Utilizando una <a href="https://uptime.is/">calculadora online de SLAs</a> vemos que Amazon puede <strong>dejar de darnos servicio durante 4 horas y 23 minutos al año</strong> sin que tenga ningún tipo de penalización.</p>
+<h4>RDS</h4>
+<p>Sobre el servicio de base de datos de AWS ofrece <strong><a href="https://aws.amazon.com/es/rds/sla/">el mismo acuerdo de servicio que EC2 (99.95%)</a></strong>. </p>
+<h4>S3</h4>
+<p>El storage de AWS, que sirve de base para muchos servicios de Amazon, <a href="https://aws.amazon.com/es/message/41926/">tal como pudimos verificar con el incidente de Febrero</a>, tiene un nivel de servicio inferior a EC2 y RDS, cosa que me ha sorprendido. El <strong><a href="https://aws.amazon.com/es/s3/sla/">SLA del S3 es del 99.90%</a></strong>, así que estaríamos hablando de <strong>casi 8 horas y 46 minutos de indisponibilidad al año</strong>. </p>
+</blockquote>
+<h3>Azure</h3>
+<blockquote>
+<h4>Virtual Machines</h4>
+<p>Por parte de Microsoft vemos que <strong><a href="https://azure.microsoft.com/en-us/support/legal/sla/virtual-machines/v1_0/">garantiza el servicio de máquinas virtuales en un 99,95%</a></strong> similar a EC2.</p>
+<h4>SQL Database</h4>
+<p>La base de datos de Microsoft en este caso no coincide con Amazon. El nivel de servicio que nos ofrece <strong><a href="https://azure.microsoft.com/en-us/support/legal/sla/sql-database/v1_0/">Azure SQL Database es del 99,90%</a></strong>.</p>
+<h4>Storage</h4>
+<p>El storage de Microsoft vemos que también tiene el <strong>mismo SLA que el storage de S3, un <a href="https://azure.microsoft.com/en-us/support/legal/sla/storage/v1_0/">99,90%</a></strong>.</p>
+</blockquote>
+<h3>Conclusiones</h3>
+<p>Os hago un pequeño resumen en una tabla:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/26398670/7b06ed92-407a-11e7-8478-ec88fce16a49.png" alt="SLA" class="align-center"></p>
+<p>Os recomiendo que dentro de cada página del SLA de cada servicio , echéis un vistazo a la manera de realizar el cálculo de dicho SLA, porque habitualmente se tienen en cuenta varias variables, no únicamente el uptime de los servicios. Si esto es positivo o negativo lo dejo a vuestro criterio.</p>
+<p>Como conclusión decir que los niveles de servicio que ofrecen ambos proveedores en sus principales productos son muy parecidos. Aquí la clave es valorar el coste de generar una infraestructura que nos cubra sobre estas posibles indisponibilidades contra el beneficio que obtendríamos teniendo nuestra infraestructura funcionando durante ese periodo. </p>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="cronica-orchestrate-2017.html" rel="prev">Crónica de el Orchestrate 2017</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="podcast-episodio-23.html" rel="next">Podcast 23: Vulnerabilidad de Wordpress, generadores de contenido estáticos y Amazon Drive.</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/sla-cloud-aws-azure.html",
+        disqus_title="El SLA del Cloud",
+        disqus_identifier="cache/posts/2017-05-15-dacacio-sla.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

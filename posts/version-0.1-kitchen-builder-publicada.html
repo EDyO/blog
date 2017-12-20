@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Versión 0.1 de kitchen-builder publicada | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/version-0.1-kitchen-builder-publicada.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Versión 0.1 de kitchen-builder publicada">
+            <meta name="og:description" content="Hoy se ha publicado la versión 0.1 de kitchen-builder.
+
+
+Chef, TDD y Kitchen-builder
+Al empezar a trabajar con un sistema de gestión de la configuración, como Chef, en el que la infrastructura, prácti">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Versión 0.1 de kitchen-builder publicada</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="agenda-proximos-eventos.html" title="Agenda: Próximos eventos" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="agile-python-bcn-meetup.html" title="Encuentro Agile-Python BCN" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Ignasi Fosch</span>
+                el <time class="published" datetime="2013-05-15T12:00:00+02:00">15/05/2013</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/chef.html"><span class="badge badge-info">Chef</span></a>
+        <a class="tag p-category" href="../tags/cucumber.html"><span class="badge badge-info">Cucumber</span></a>
+        <a class="tag p-category" href="../tags/cucumber-chef.html"><span class="badge badge-info">Cucumber-Chef</span></a>
+        <a class="tag p-category" href="../tags/herramientas.html"><span class="badge badge-info">Herramientas</span></a>
+        <a class="tag p-category" href="../tags/rvm.html"><span class="badge badge-info">RVM</span></a>
+        <a class="tag p-category" href="../tags/tdd.html"><span class="badge badge-info">TDD</span></a>
+        <a class="tag p-category" href="../tags/kitchen-builder.html"><span class="badge badge-info">kitchen-builder</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p>Hoy se ha publicado la versión 0.1 de <a class="reference external" href="https://github.com/ifosch/kitchen-builder">kitchen-builder</a>.</p>
+<!-- TEASER_END -->
+<div class="section" id="chef-tdd-y-kitchen-builder">
+<h2>Chef, TDD y Kitchen-builder</h2>
+<p>Al empezar a trabajar con un sistema de gestión de la configuración, como <a class="reference external" href="http://www.opscode.com/chef/">Chef</a>, en el que la infrastructura, prácticamente, se programa, es fácil enfrentarse a ciertos problemas. Para superarlos, aplicar soluciones ya conocidas suele ser un buen planteamiento. Por ejemplo, para poder comprobar el funcionamiento de las recetas, lo primero que se puede plantear es aplicar técnicas como el <a class="reference external" href="http://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas">TDD</a> o el <a class="reference external" href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a>, muy utilizadas en el mundo del desarrollo.</p>
+<p>Siendo la necesidad, y la solución, muy habituales y muy comentadas, ya hace algún tiempo que van apareciendo herramientas y charlas al respecto. Una de éstas herramientas es <a class="reference external" href="http://www.cucumber-chef.org/">Cucumber-Chef</a>, que consiste en una serie de herramientas, basadas en <a class="reference external" href="http://cukes.info/">Cucumber</a>, utilidad de <a class="reference external" href="http://en.wikipedia.org/wiki/Behavior-driven_development">BDD</a> ampliamente utilizada.</p>
+<p>Al empezar a utilizar <a class="reference external" href="http://www.cucumber-chef.org/">Cucumber-Chef</a>, es probable que se empiecen a encontrar bastantes problemas, especialmente en su version 2.0.7, la que se instala siguiendo sus instrucciones.</p>
+<p>Además, todas éstas herramientas están desarrolladas con Ruby y se distribuyen, como todas las librerías de las que dependen, como gemas. Al hacer la instalación como se indica, lo más probable es que se instalen versiones incompatibles o demasiado actualizadas.</p>
+<p>Es por esto que se empezó a desarrollar <a class="reference external" href="https://github.com/ifosch/kitchen-builder">kitchen-builder</a>, una ayuda para disponer de un entorno homogéneo, funcional y estable, para Linux y MacOS que incluye la instalación de <a class="reference external" href="http://www.opscode.com/chef/">Chef</a>, <a class="reference external" href="http://cukes.info/">Cucumber</a>, <a class="reference external" href="http://www.cucumber-chef.org/">Cucumber-Chef</a>, corrigiendo los errores que incorpora en la versión 2.0.7, <a class="reference external" href="http://acrmp.github.io/foodcritic/">Foodcritic</a>, y además, todo esto dentro de un entorno cerrado, gracias a <a class="reference external" href="https://rvm.io/">RVM</a>, de modo que no afectará a las gemas previamente instaladas en el sistema.</p>
+</div>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="agenda-proximos-eventos.html" rel="prev">Agenda: Próximos eventos</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="agile-python-bcn-meetup.html" rel="next">Encuentro Agile-Python BCN</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/version-0.1-kitchen-builder-publicada.html",
+        disqus_title="Versi\u00f3n 0.1 de kitchen-builder publicada",
+        disqus_identifier="cache/posts/2013-05-15-natx-kitchen-builder-0.1.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

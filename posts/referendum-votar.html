@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Referendum 1-O: ¿Dónde votar? | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/referendum-votar.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Referendum 1-O: ¿Dónde votar?">
+            <meta name="og:description" content="No, no nos hemos vuelto locos, en Edyo seguimos hablando de tecnología. Sabemos también que últimamente no publicamos más que podcasts; a pesar de ello, mantenemos el blog para cosas que se cuentan me">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Referendum 1-O: ¿Dónde votar?</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="podcast-episodio-29.html" title="Podcast 29: Herramientas del día a día." rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="podcast-pildora-1.html" title="Píldora 1: Analizando la seguridad del web del referendum catalán." rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Daniel Aresté</span>
+                el <time class="published" datetime="2017-09-22T22:00:00+02:00">22/09/2017</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/javascript.html"><span class="badge badge-info">JavaScript</span></a>
+        <a class="tag p-category" href="../tags/seguridad.html"><span class="badge badge-info">Seguridad</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p><img src="https://user-images.githubusercontent.com/5310624/30765928-56c56350-9ff2-11e7-85a8-cc8fad0d7947.jpg" alt="yes-no" class="align-left height=" width="200"></p>
+<p>No, no nos hemos vuelto locos, en Edyo seguimos hablando de tecnología. Sabemos también que últimamente no publicamos más que podcasts; a pesar de ello, mantenemos el blog para cosas que se cuentan mejor escritas que narradas. Hoy os traemos un análisis técnico que no puede ser más de actualidad: la web de consulta del censo para el referendum del 1-O. Os prometo que vale la pena.</p>
+<!-- TEASER_END -->
+
+<p>Hace apenas un par de días que ha empezado a circular, sobre todo por redes sociales y de mensajería, la URL para que los ciudadanos consulten el colegio electoral que tienen asignado en el referendum del día 1 de Octubre:</p>
+<p><a href="https://onvotar.garantiespelreferendum.com/on-votar/index.html">https://onvotar.garantiespelreferendum.com/on-votar/index.html</a></p>
+<p>En la página encontraréis un formulario donde, introduciendo DNI, fecha de nacimiento y código postal, podemos consultar la mesa electoral que nos corresponde. Hay ciertas cosas que no puedo evitar en esta vida: pedir tiramisú de postre si lo veo en la carta, llevar la contraria, y esnifar tráfico de red cuando hago submit en un formulario.</p>
+<p>En este caso, un primer vistazo nos indica que las cosas parecen estar haciéndose bien: la web dispone de un certificado SSL emitido por Comodo, y SSLlabs le otorga la máxima nota (grado A) en todos sus tests:</p>
+<p><a href="https://www.ssllabs.com/ssltest/analyze.html?d=onvotar.garantiespelreferendum.com">https://www.ssllabs.com/ssltest/analyze.html?d=onvotar.garantiespelreferendum.com</a></p>
+<p>¡Bien por los admins! Podemos estar tranquilos, los datos personales que mandemos van a circular por un canal seguro. No obstante, sigo queriendo ver dónde y cómo se mandan mis datos al hacer click en el botón de buscar. Preparo el escenario: abro las <a href="https://developer.chrome.com/devtools">Chrome Developer Tools</a>, relleno mis datos, pulso el botón de buscar. Bien, la web me responde con los datos del colegio electoral donde siempre me toca ir. No obstante, al echarle un ojo al tráfico http capturado llegan las primeras sorpresas...</p>
+<h3>¿Dónde están mis datos?</h3>
+<p>Estoy muy acostumbrado a ver un <code>POST</code> como forma estándar de subir datos hacia un servidor. En este caso, no obstante, no veo aparecer más que un solitario <code>GET</code> en mi pantalla al hacer submit del formulario... No es tan habitual, pero subir información a través de una petición <code>GET</code> incorporando los datos en variables en la propia URL, o quizás en cookies, también es una práctica común. Echémosle un ojo a esa petición:</p>
+<pre class="code literal-block"><span class="n">Request</span> <span class="n">URL</span><span class="o">:</span><span class="n">https</span><span class="o">:</span><span class="c1">//onvotar.garantiespelreferendum.com/db/c3/a1.db</span>
+<span class="n">Request</span> <span class="n">Method</span><span class="o">:</span><span class="n">GET</span>
+<span class="n">Status</span> <span class="n">Code</span><span class="o">:</span><span class="mi">200</span>
+<span class="n">Remote</span> <span class="n">Address</span><span class="o">:</span><span class="mf">104.18.36.145</span><span class="o">:</span><span class="mi">443</span>
+<span class="n">Referrer</span> <span class="n">Policy</span><span class="o">:</span><span class="n">no</span><span class="o">-</span><span class="n">referrer</span><span class="o">-</span><span class="n">when</span><span class="o">-</span><span class="n">downgrade</span>
+<span class="nl">Origin:</span><span class="n">null</span>
+<span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="o">:</span><span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">Macintosh</span><span class="p">;</span> <span class="n">Intel</span> <span class="n">Mac</span> <span class="n">OS</span> <span class="n">X</span> <span class="mi">10</span><span class="n">_12_6</span><span class="p">)</span> <span class="n">AppleWebKit</span><span class="o">/</span><span class="mf">537.36</span> <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">60.0.3112.113</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">537.36</span>
+</pre>
+
+
+<p>Un momento. ¿Y mis datos? No están en la URL. No hay ninguna cookie en la petición. No hay ninguna cabecera http fuera de lo normal. Y además, esa URI tan extraña.... <code>/db/c3/a1.db</code>. Pruebo a cargarla y obtengo lo siguiente:</p>
+<pre class="code literal-block"><span class="mf">1f</span><span class="n">ebc7fc1f60ae314b424303ea516a290f305a36c0bab4f3dbc98d810f2ee162e59878057968a22bbaa69a9dc066414f1506a8d10dfa1d73130b3ee2f4bf9037c7ab8642528c9b0c5c157b4ea0dd9bbb1815c5b2bd4519852e59c4bac040599db36127f0f52530b7f45455f9d4fa55798a9918a65391c49a0181c677da360346da22e7b0c33b05bfcbb55a4ee75820fe1f9fbdd532b40ccac4c6ba85d610679b66bad2a43fbb2a418eec58c4772a42113b3fa25052c2435c5c4a5ffe8bcaf2896d220eaa4c446f19c62b26ccefd3</span>
+<span class="n">e4d353eeb673c351f84276fb8c159381ff641775b9e0a17925245f39bedd33661212588b3ca926ee31a49859055f901382279a24c291076660b3e80e65de8ec66e948bc64b5120ae09dd56f955302e1323ef8afdd29143269f2b7c3a8e6c02ebc70d0c9d949092ca19246d5cba3b0c69c314bf7d7a4222326fd7b78c8768e029e4e5ef1175ed5dd457ce3fc88840f9ce941eeb2bd28521ac5eb8be1be9faf1b40ee3f2f81683be3c3a93f1b806aaa5ff7761b873a725ff470a67983d3d827bbbdfcb228c4ec505b4347945c39ab9</span>
+<span class="mf">2f</span><span class="n">d03efea47e19d24331a4b6b0ffa9988efda433d5ad5a31c10d2b0b849ee2013e7be6ccb75336147a600c7f542b702289d843d683156797e32e360a5e96f499c0350ba3de76fbe91694463381b9ff1fbf4820ab215b03da5cf604b5523530c9d21ca7f84e150e8ad3cd08d06f05c6cf81c9e87ee49ee60d709496a1ca35a5a742992cb9736bcbf64295a0103b44c3cb7ea0e923a0a1bd3540abb6a0ec78bf56f94967b2ec92ab8000bec75d4dddcb12f0651d062693c068714cd449e45692eb3ef3821db6c1302ff5e57d572d1d</span>
+<span class="p">...</span>
+</pre>
+
+
+<p>Decenas de líneas con strings de lo que parece ser hexadecimal, y de ancho fijo (412 caracteres exactamente). Sr. Puigdemont, definitivamente ha captado usted mi atención.</p>
+<h3>El referendum serverless</h3>
+<p>Ya lo dijo Mahoma: si mis datos no viajan al servidor, tiene que ser el 'servidor' el que viaja hacia mis datos. Efectivamente, parece que estamos ante un caso de contenido estático en servidor y proceso de datos en local. ¿Alguien ha dicho Javascript?</p>
+<p>¡Bingo! En <code>index.html</code> tenemos a la madre del cordero:</p>
+<pre class="code literal-block"><span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"../js/bundleV9.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+function calcula() {
+  document.querySelector("#stepLoad").style.display="inline"
+  var dni = document.querySelector("#dni").value
+  dni = dni.replace(/ /g,'').replace(/-/g,'').replace(/\./g,'');
+  var dn_dia = document.querySelector("#dn_dia").value
+  var dn_mes = document.querySelector("#dn_mes").value
+  var dn_any = document.querySelector("#dn_any").value
+  var cp = document.querySelector("#cp").value
+  if (dn_dia.length == 1)
+     dn_dia = "0"+ dn_dia
+  if (dn_mes.length == 1)
+     dn_mes = "0"+ dn_mes
+  if (dn_any.length == 2)
+     dn_any = "19" + dn_any
+  onvoto.calcular(dni.slice(-6),dn_any+dn_mes+dn_dia,cp, function(i) {
+    document.querySelector("#stepLoad").style.display="none"
+    if (( typeof i === 'string' ) <span class="err">&amp;&amp;</span> ( i == 'not-found' ))  {
+        document.querySelector("#response").innerHTML = "No s'ha trobat cap registre corresponent a les dades introduïdes."
+    } else {
+       document.querySelector("#stepOne").style.display="none";
+       document.querySelector("#response").innerHTML = i<span class="cp">[</span><span class="mi">0</span><span class="cp">]</span> + "\n" + i<span class="cp">[</span><span class="mi">1</span><span class="cp">]</span> + "\n" + i<span class="cp">[</span><span class="mi">2</span><span class="cp">]</span> + "\n\n"
+                                                     + "Districte:" + i<span class="cp">[</span><span class="mi">3</span><span class="cp">]</span> + "\n" + "Secció:" + i<span class="cp">[</span><span class="mi">4</span><span class="cp">]</span> + "\n"
+                                                     + 'Mesa: ' + i<span class="cp">[</span><span class="mi">5</span><span class="cp">]</span>;
+    }
+   })
+}
+<span class="nt">&lt;/script&gt;</span>
+</pre>
+
+
+<p>Esencialmente, esta pieza de código recoge nuestros datos (DNI, fecha de nacimiento y código postal), los normaliza (reescribe la fecha en formato AAAAMMDD, por ejemplo) y los pasa a la función <code>onvoto.calcular</code>. Esta función devuelve la información de la mesa electoral lista para mostrar o, en su defecto, el string 'not-found' que aparentemente indicaría que no se han encontrado coincidencias.</p>
+<p>Nuestro siguiente paso debe ser analizar lo que ocurre en <code>onvoto.calcular</code>, cuyo código podremos encontrar en el fichero <code>/js/bundleV9.js</code>.</p>
+<h3>Los ficheros del censo</h3>
+<p>Nuestra misteriosa función empieza en la línea 69058 del mencionado fichero, y enseguida empezamos a entender de qué va todo esto (puntos suspensivos indican partes no relevantes omitidas):</p>
+<pre class="code literal-block"><span class="kd">var</span> <span class="nx">calcular</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="nx">dn</span><span class="p">,</span> <span class="nx">cp</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+    <span class="p">...</span>
+    <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">dni</span> <span class="o">+</span> <span class="nx">data_naixement</span> <span class="o">+</span> <span class="nx">codi_postal</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">firstSha256</span> <span class="o">=</span> <span class="nx">hash</span><span class="p">(</span><span class="nx">bucleHash</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span><span class="nx">BUCLE</span><span class="p">));</span>
+    <span class="kd">var</span> <span class="nx">secondSha256</span> <span class="o">=</span> <span class="nx">hash</span><span class="p">(</span><span class="nx">firstSha256</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">dir</span> <span class="o">=</span> <span class="nx">secondSha256</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nx">DIRSHA</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">file</span> <span class="o">=</span> <span class="nx">secondSha256</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">DIRSHA</span><span class="p">,</span><span class="nx">DIRSHA</span><span class="o">+</span><span class="nx">FILESHA</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">'/index.html'</span><span class="p">,</span><span class="s1">'/'</span><span class="p">);</span>
+    <span class="p">...</span>
+    <span class="nx">url</span> <span class="o">+=</span> <span class="s1">'../db/'</span> <span class="o">+</span><span class="nx">dir</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="nx">file</span> <span class="o">+</span> <span class="nx">FILEEXTENSION</span><span class="p">;</span>
+
+    <span class="nx">request</span><span class="p">(</span> <span class="nx">url</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">...</span>
+</pre>
+
+
+<p>La función toma nuestros datos y los concatena en la variable <code>key</code>. A partir de ese valor, crea dos hashes SHA256 (si seguís las funciones a las que se llaman, veréis que el primero se calcula realizando un bucle de hashes de ¡1714 iteraciones! - guiño guiño) y los almacena en <code>firstSha256</code> y <code>secondSha256</code> en formato hexadecimal. Y aquí empezamos a entender ciertas cosas: las siguientes líneas construyen la misteriosa URI <code>/db/xy/zw.db</code> a partir de los cuatro primeros caracteres de <code>secondSha256</code> (dos para la carpeta y dos para el nombre del fichero). Una vez construida la URI, la función <code>request</code> se encarga de hacer la petición http correspondiente para descargarla.</p>
+<p>Resumiendo lo anterior, estamos ante una especie de database sharding: a partir de nuestro dni, fecha de nacimiento y código postal se construye una URI única a través de la cual se descarga un fichero que supuestamente contiene la información que solicitamos.</p>
+<p>Aquí se me activa de inmediato mi sentido arácnido. Ese fichero debe contener no solo mis datos censales sino los de muchas otras personas. El hecho de que haya decenas de líneas hace pensar en un registro/censo por línea, y por otro lado el hecho de truncar el mapeo a cuatro caracteres hexadecimales hace inevitable que se produzcan colisiones.</p>
+<p>De hecho, unos cálculos rápidos nos revelan que efectivamente estamos en el caso de un registro censal por línea. Cuatro caracteres hexadecimales nos ofrecen 16^4 combinaciones, o ficheros existentes. Empíricamente he observado unos 70 registros por fichero de media, así que podemos estimar un total de
+algo más de 4.5 millones de registros (que bien podría ser el número de catalanes en edad de votar en Catalunya).</p>
+<p>De hecho, no es difícil construir un script que recorra el espacio muestral que va de <code>/db/00/00.db</code> a <code>/db/ff/ff.db</code> y descargar los cuatro millones y medio de registros en no demasiado tiempo. Esto debería ponernos inmediatamente en alerta: ¿acabamos de descargar datos del censo de todos los catalanes en edad de voto? ¿Qué datos contienen exactamente esos ficheros y en qué formato? ¿Va la Guardia Civil a llamar a mi puerta en breve?</p>
+<p>Para responder a las preguntas anteriores, sigamos investigando qué es lo que la función <code>onvoto.calcular</code> hace con ese fichero una vez descargado.</p>
+<h3>Gracias, criptografía</h3>
+<p>El cuerpo de la función <code>request</code> es el siguiente:</p>
+<pre class="code literal-block">      <span class="kd">var</span> <span class="nx">found</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Error: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="kd">var</span> <span class="nx">info</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"\n"</span><span class="p">);</span>
+      <span class="nx">info</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">line</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">line</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">60</span><span class="p">)</span> <span class="o">==</span> <span class="nx">secondSha256</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">4</span><span class="p">)){</span>
+          <span class="kd">var</span> <span class="nx">info</span> <span class="o">=</span> <span class="nx">decrypt</span><span class="p">(</span><span class="nx">line</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span><span class="nx">firstSha256</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="s1">'#'</span><span class="p">);</span>
+          <span class="nx">found</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="nx">cb</span><span class="p">(</span><span class="nx">info</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">})</span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">found</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">cb</span><span class="p">(</span><span class="s2">"not-found"</span><span class="p">);</span>
+      <span class="p">}</span>
+</pre>
+
+
+<p>La función es básicamente un bucle donde se analiza cada línea del fichero. Si los 60 primeros caracteres hexadecimales coinciden con los 60 últimos caracteres de <code>secondSha256</code> (recordad que son 64 en total y los 4 primeros se usaban para construir la URI), aplicamos la función <code>decrypt</code> al resto de la línea, y el resultado lo devolvemos por callback en forma de array. Si no hay coincidencia, pasamos a la siguiente línea, y si se acaban las líneas contestamos con un 'not-found'.</p>
+<p>Por lo que parece, cada línea de registro no es más que un mapa clave - valor: la clave es un hash de nuestros datos personales, y el valor sería una cadena encriptada con los datos censales. Si seguimos la implementación de la función <code>decrypt</code>, veremos que la cadena está cifrada con criptografía de clave simétrica, concretamente <code>aes-256-cbc</code>. Cifrado de grado militar.</p>
+<p>¿Y cuál es la clave? Pues lo vemos en los parámetros de la llamada: <code>firstSha256</code>. Recordemos que esta cadena es el resultado de aplicar sha256 1714 veces recursivamente a la cadena dni+fechanacimiento+codigopostal, algo realmente imposible de revertir. Nuestros datos personales están en los ficheros, pero en forma de hashes irreversibles.</p>
+<h3>Datos censales</h3>
+<p>Prestad de nuevo atención a la línea donde desencriptamos:</p>
+<pre class="code literal-block"><span class="n">var</span> <span class="n">info</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span><span class="n">firstSha256</span><span class="p">).</span><span class="n">split</span><span class="p">(</span><span class="sc">'#'</span><span class="p">);</span>
+</pre>
+
+
+<p>Y refresquemos ahora la sección que recoge esos datos y los pinta en el html original:</p>
+<pre class="code literal-block"><span class="n">document</span><span class="p">.</span><span class="n">querySelector</span><span class="p">(</span><span class="s">"#response"</span><span class="p">).</span><span class="n">innerHTML</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n\n</span><span class="s">"</span>
+                                              <span class="o">+</span> <span class="s">"Districte:"</span> <span class="o">+</span> <span class="n">i</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span> <span class="o">+</span> <span class="s">"Secció:"</span> <span class="o">+</span> <span class="n">i</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span>
+                                              <span class="o">+</span> <span class="err">'</span><span class="n">Mesa</span><span class="o">:</span> <span class="err">'</span> <span class="o">+</span> <span class="n">i</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</pre>
+
+
+<p>La cadena desencriptada contiene varios campos (al menos seis, numerados del cero al cinco), donde la almohadilla actúa de separador. Se puede comprobar fácilmente que los campos, en orden, son los siguientes: nombre del colegio electoral, dirección, población, distrito, sección y mesa. Aún así, quise echarle un vistazo al string original. Descargué el fichero js original, añadí un <code>console.log</code> para que me mostrara la cadena desencriptada, hice unas llamadas en local y...</p>
+<p>... otra sorpresa. Hay un séptimo campo que no se muestra en el html de resultado. Esto es lo que me muestra mi consola javascript de Chrome:</p>
+<pre class="code literal-block"><span class="mi">0</span><span class="o">:</span><span class="s">"ESCOLA PUBLICA xxxxxxxxx"</span>
+<span class="mi">1</span><span class="o">:</span><span class="s">"[Direccion postal]"</span>
+<span class="mi">2</span><span class="o">:</span><span class="s">"[Poblacion]"</span>
+<span class="mi">3</span><span class="o">:</span><span class="s">"1"</span>
+<span class="mi">4</span><span class="o">:</span><span class="s">"1"</span>
+<span class="mi">5</span><span class="o">:</span><span class="s">"0A"</span>
+<span class="mi">6</span><span class="o">:</span><span class="s">"cb6e1fbbb81e69d9d213e80bebaf946fe3b2520a2c9eb4a0f4cbb72de1a5d0a530556d98d91ee63ac6ddca456388856f7bf01s03"</span>
+<span class="nl">length:</span><span class="mi">7</span>
+</pre>
+
+
+<p>El campo número 6 es una cadena hexadecimal de 105 caracteres. No se repite en el resto del fichero. He intentado infructuosamente desencriptarla usando la misma clave simétrica que desencripta los campos anteriores, pero no muestra nada con sentido. Y aquí me rindo, amigos lectores; si habéis llegado hasta aquí os animo a que continuéis la investigación y desveléis qué puede significar este séptimo campo.</p>
+<h3>Conclusiones</h3>
+<p>El diseño de la web del referendum es francamente ingenioso, y merece mi más sincero aplauso. El creador ha logrado una arquitectura con contenido estático que no depende de backends para funcionar, ya que traslada toda la lógica al lado cliente con javascript. A la vez, ha logrado almacenar datos sensibles de una forma criptográficamente segura y sin penalizar eficiencia gracias a una ingeniosa técnica de sharding. La arquitectura claramente responde a la necesidad de replicar la web de una forma rápida y funcional ante las más que previsibles órdenes judiciales de bloqueo de hostings que irán llegando.</p>
+<p>Y por último, si por casualidad eres uno de los diseñadores y este post ha llegado a ti, por favor cuéntanos: ¿Qué leches es el campo número seis?</p>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="podcast-episodio-29.html" rel="prev">Podcast 29: Herramientas del día a día.</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="podcast-pildora-1.html" rel="next">Píldora 1: Analizando la seguridad del web del referendum catalán.</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/referendum-votar.html",
+        disqus_title="Referendum 1-O: \u00bfD\u00f3nde votar?",
+        disqus_identifier="cache/posts/2017-09-22-dareste-referendum-donde-votar.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

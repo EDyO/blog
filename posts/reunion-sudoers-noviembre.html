@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Reunión de Sudoers BCN de Noviembre | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/reunion-sudoers-noviembre.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Reunión de Sudoers BCN de Noviembre">
+            <meta name="og:description" content="En la charla de este mes, Javier Arturo Rodríguez habló sobre Ansible, otra herramienta para la gestión de configuración. Aunque bien podría compararse en funcionalidad con Puppet o Chef, su diseño y ">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Reunión de Sudoers BCN de Noviembre</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="certificaciones-oficiales-mongodb.html" title="Certificaciones oficiales en MongoDB" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="curso-openstack-barcelona.html" title="Curso de OpenStack en Barcelona" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Ignasi Fosch</span>
+                el <time class="published" datetime="2013-11-06T20:00:00+01:00">06/11/2013</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/ansible.html"><span class="badge badge-info">Ansible</span></a>
+        <a class="tag p-category" href="../tags/eventos.html"><span class="badge badge-info">Eventos</span></a>
+        <a class="tag p-category" href="../tags/sudoers-bcn.html"><span class="badge badge-info">Sudoers BCN</span></a>
+    </span>
+
+            </small>
+        </div>
+        <img alt="sudo make me a sandwich" class="align-left" src="../images/SudoersBCN.png" style="width: 180px; height: 150px;">
+<p>En la charla de este mes, <a class="reference external" href="https://twitter.com/codehead">Javier Arturo Rodríguez</a> habló sobre <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a>, otra herramienta para la gestión de configuración. Aunque bien podría compararse en funcionalidad con <a class="reference external" href="http://puppetlabs.com/">Puppet</a> o <a class="reference external" href="http://www.opscode.com/chef/">Chef</a>, su diseño y las técnicas utilizadas la convierten en una herramienta muy sencilla, completa e interesante, incluso para sustituir a otras herramientas como <a class="reference external" href="http://docs.fabfile.org/en/1.8/">Fabric</a> o <a class="reference external" href="http://www.capistranorb.com/">Capistrano</a>.</p>
+<!-- TEASER_END -->
+<div class="section" id="origen-del-nombre">
+<h2>Origen del nombre</h2>
+<p>El término <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a> lo utilizó <a class="reference external" href="http://es.wikipedia.org/wiki/Ursula_K._Le_Guin">Ursula K. Le Guin</a> en sus relatos de ciencia ficción, para referirse a un dispositivo de comunicación instantánea y superluminal, y otros autores, como <a class="reference external" href="http://es.wikipedia.org/wiki/Orson_Scott_Card">Orson Scott Card</a> en <a class="reference external" href="http://es.wikipedia.org/wiki/El_juego_de_Ender">Ender's Game</a>, lo reaprovecharon. De todos modos, también es el término utilizado para referirse al director de una orquesta. No en vano, <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a> funciona desde un nodo central que suele ser la consola del administrador.</p>
+</div>
+<div class="section" id="el-proyecto">
+<h2>El proyecto</h2>
+<p>El proyecto es iniciado por <a class="reference external" href="http://michaeldehaan.net/">Michael DeHaan</a>, actual CTO de la empresa que da soporte. Tiene un diseño basado en <a class="reference external" href="http://es.wikipedia.org/wiki/Principio_KISS">KISS</a>, utiliza <a class="reference external" href="http://openssh.org/es/">SSH</a> para conectarse a los clientes, que únicamente necesitan disponer de la versión 2.6 de <tt class="docutils literal">python</tt>. Al utilizar el protocolo <a class="reference external" href="http://openssh.org/es/">SSH</a>, aprovecha su puerto de conexión y su infraestructura, como la de autenticación, para funcionar. Hay que destacar que para las tareas que requieran privilegios, puede utilizar <tt class="docutils literal">sudo</tt>, pero no es capaz de funcionar con contraseña.</p>
+<p>Aunque se trata de <em>software open source</em>, existe un modelo de negocio comercial, al que da soporte la empresa <a class="reference external" href="http://www.ansibleworks.com/">AnsibleWorks</a>, que incluye ciertos componentes de pago.</p>
+</div>
+<div class="section" id="instalacion">
+<h2>Instalación</h2>
+<p>Instalación se puede realizar de diferentes formas:</p>
+<ul class="simple">
+<li>Con paquetes nativos, existen incluso para <a class="reference external" href="http://bsd.org">BSD</a>.</li>
+<li>Se puede instalar usando <tt class="docutils literal">pip</tt>, como tantos otros módulos de <a class="reference external" href="http://python.org">Python</a>.</li>
+<li>Tambié se puede instalar compilándolo desde el código fuente, que es descargable en un paquete o utilizando <a class="reference external" href="http://github.com/">GitHub</a>.</li>
+</ul>
+<p>Es conveniente tener los siguientes elementos bien configurados:</p>
+<ul class="simple">
+<li>Tener claves <a class="reference external" href="http://openssh.org/es/">SSH</a> adecuadas.</li>
+<li>Utilizar <tt class="docutils literal"><span class="pre">ssh-agent</span></tt> en la estación de trabajo, asociando dichas claves.</li>
+<li>Comprovar el fichero <tt class="docutils literal"><span class="pre">~/.ssh/config</span></tt>, de modo que los accesos que requieran utilizar puertos alternativos estén bien configurados.</li>
+</ul>
+</div>
+<div class="section" id="configuracion">
+<h2>Configuración</h2>
+<p>La configuración es tan sencilla como disponer de uno o más ficheros de inventario. Estos ficheros tienen un formato muy sencillo: En cada línea se escribirá el nombre de un nodo a gestionar. En caso de que dicho nodo requiera el uso de un puerto distinto al habitual, convendrá indicarlo añadiéndolo al nombre del servidor con un <tt class="docutils literal">:</tt> delante. En los nombres de los equipos se pueden utilizar ciertas expresiones para indicar, por ejemplo, rangos numéricos, indicando así una serie más grande de nodos en una sola línea.</p>
+<p>Además, como si de un fichero <a class="reference external" href="http://es.wikipedia.org/wiki/INI_(extensi%C3%B3n_de_archivo)">INI</a> se tratara, se pueden espeficar secciones, encabezadas con un nombre entre corchetes (<tt class="docutils literal">[]</tt>) que corresponderán en grupos de servidores. En caso que sea necesario, se puede incluir otra sección para un grupo ya existente que contenga variables específicas para esos grupos.</p>
+<p>Pueden disponerse de distintos ficheros, pero sólo uno se puede utilizar al mismo tiempo, debiendo indicar a <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a> cuál se desea utilizar con el atributo <tt class="docutils literal"><span class="pre">-i</span></tt>.</p>
+</div>
+<div class="section" id="modulos">
+<h2>Módulos</h2>
+<p>Los módulos son los que le dan funcionalidad a <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a>. Estos módulos consisten en código que <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a> envía al nodo remoto y lo ejecuta, esperando que devuelva una estructura <a class="reference external" href="http://es.wikipedia.org/wiki/JSON">JSON</a> con un conjunto de datos que variarán según el módulo. En cualquier caso, el <a class="reference external" href="http://es.wikipedia.org/wiki/JSON">JSON</a> deberá contener un atributo llamado <tt class="docutils literal">changed</tt>, consistente en un valor booleano que indicarà si la ejecución cambió algo o no. La ejecución de un módulo siempre debe ser idempotente, por lo que, si no es necesario, no debería realizar ningún cambio. Existe un comando <tt class="docutils literal"><span class="pre">ansible-doc</span></tt> que ofrece documentación en consola sobre los módulos y sus opciones.</p>
+<p>En los siguientes comandos, se ejecuta el módulo setup en todos los servidores, en uno sólo llamado <tt class="docutils literal">courseware</tt> o en todos los pertecientes a un grupo llamado <tt class="docutils literal">webservers</tt>:</p>
+<pre class="literal-block">
+ansible -vvvv -i production all -m setup
+ansible -vvvv -i production courseware -m setup
+ansible -vvvv -i production webservers -m setup
+</pre>
+<p>Hay muchos módulos, algunos muy interesantes, permiten, por ejemplo, acceder a la información que el <a class="reference external" href="http://puppetlabs.com/facter">facter</a>, de <a class="reference external" href="http://puppetlabs.com/">Puppet</a>, o el <a class="reference external" href="http://docs.opscode.com/ohai.html">ohai</a>, de <a class="reference external" href="http://www.opscode.com/chef/">Chef</a>, pueden recopilar del nodo. Esta información se podrá utilizar en la configuración del mismo.</p>
+</div>
+<div class="section" id="playbooks">
+<h2><em>Playbooks</em></h2>
+<p>Para evitar la ejecución consecutiva de órdenes, <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a> permite crear lo que denomina <em>Playbooks</em>. En ellos, se definen qué módulos se aplican y cómo. Pueden contemplarse como una descripción del estado deseado del nodo en cuestión. Esta definición se escribe en una variante de <a class="reference external" href="http://es.wikipedia.org/wiki/YAML">YAML</a>, conteniendo cuatro secciones específicas:</p>
+<ul class="simple">
+<li>
+<tt class="docutils literal">vars</tt> donde, si es necesario se crearán las variables necesarias para la ejecución del <em>playbook</em>.</li>
+<li>
+<tt class="docutils literal">hosts</tt> donde se indicará a qué nodo, o nodos, se debe aplicar.</li>
+<li>
+<tt class="docutils literal">tasks</tt> que detallan los módulos con sus respectivas opciones.</li>
+<li>
+<tt class="docutils literal">handlers</tt> que, si es necesario, indicarán gestores para ciertas situaciones.</li>
+</ul>
+<p>Los <em>playbooks</em> se organizan en directorios donde se pueden encontrar también:</p>
+<ul class="simple">
+<li>ficheros individuales, que serán copiados tal cuál están al servidor configurado.</li>
+<li>plantillas, escritas en <a class="reference external" href="http://jinja.pocoo.org/docs/">Jinja2</a>, para generar ficheros cuyo contenido puede variar según ciertos parámetros.</li>
+<li>definiciones de roles, que son otro tipo de agrupaciones de servidores que permiten incluir variables, nodos, tareas, gestores y plantillas específicas.</li>
+</ul>
+<p>Los <em>playbooks</em>, aunque utilicen <a class="reference external" href="http://es.wikipedia.org/wiki/YAML">YAML</a>, pueden permitir cierto nivel de control de flujo o seleccciones interesantes. Por ejemplo, se puede aplicar un módulo sobre una lista de elementos sobre la que iterar, los cuales pueden modificar variables o parámetros. La aplicación de un <em>playbook</em> específico sobre un único servidor se hará con el comando <tt class="docutils literal"><span class="pre">ansible-play</span> <span class="pre">-l</span> &lt;nodo&gt; &lt;playbook&gt;</tt>.</p>
+</div>
+<div class="section" id="modos">
+<h2>Modos</h2>
+<p>Uno de las principales desventajas que tiene <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a> por su diseño es la cantidad de nodos que se pueden gestionar simultáneamente. Especialmente, debido al coste de las sesiones <a class="reference external" href="http://openssh.org/es/">SSH</a>. Por ello se creó, inicialmente, lo que se denominó modo <em>Fireball</em>. Este modo consistía en arrancar un servidor persistente en el cliente que, mediante el uso de una instancia local de <a class="reference external" href="http://zeromq.org/">0mq</a> y claves propias, iba recibiendo las instrucciones y las iba ejecutando. De todos modos, esto quedó obsoleto y se sustituyó por el modo <em>Accelerated</em> que hace algo similar, pero por <a class="reference external" href="http://openssh.org/es/">SSH</a> de nuevo y sin <a class="reference external" href="http://zeromq.org/">0mq</a>. También se dispone de un modo llamado <em>Local</em> que es el utilizado para configurar con Ansible el mismo nodo en el que se encuentra.</p>
+<p>Otra de las desventajas que se pueden producir es el acceso a nodos en ubicaciones con latencias muy altas, o con conectividad muy inestable. Para ello se suele utilizar un <a class="reference external" href="http://es.wikipedia.org/wiki/Bastion_host">nodo bastión</a>, como si de un <a class="reference external" href="http://es.wikipedia.org/wiki/Proxy">proxy</a> se tratara.</p>
+</div>
+<div class="section" id="version-comercial">
+<h2>Versión comercial</h2>
+<p>La versión comercial incluye, a parte de las opciones de soporte correspondientes, dos módulos especiales:</p>
+<ul class="simple">
+<li>
+<em>AWX</em> que es un interfaz web de gestión que permite ciertos niveles de configuración más fácilmente, como el concepto de organizaciones o proyectos.</li>
+<li>El modo <em>Callback</em> que consiste en permitir el envío asíncrono de configuraciones.</li>
+</ul>
+</div>
+<div class="section" id="mas-informacion">
+<h2>Más información</h2>
+<p>Durante y posteriormente a la charla, se comentaron ciertas utilidades relacionadas con <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a>:</p>
+<ul class="simple">
+<li>En <a class="reference external" href="http://www.rackspace.com/es/">Rackspace</a> utilizan <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a> para <a class="reference external" href="http://www.slideshare.net/JesseKeating/ansiblefest-rax">gestionar varios miles de servidores de un modo distinto</a>.</li>
+<li>Existe una <a class="reference external" href="https://github.com/dominis/ansible-shell">herramienta</a> para trabajar con <a class="reference external" href="http://www.ansibleworks.com/">Ansible</a> de forma interactiva.</li>
+</ul>
+<p>Con mucha probabilidad existan muchas más herramientas.</p>
+</div>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="certificaciones-oficiales-mongodb.html" rel="prev">Certificaciones oficiales en MongoDB</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="curso-openstack-barcelona.html" rel="next">Curso de OpenStack en Barcelona</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/reunion-sudoers-noviembre.html",
+        disqus_title="Reuni\u00f3n de Sudoers BCN de Noviembre",
+        disqus_identifier="cache/posts/2013-11-05-natx-reunion-sudoers-noviembre.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

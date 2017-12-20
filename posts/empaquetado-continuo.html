@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Empaquetado Contínuo | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/empaquetado-continuo.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Empaquetado Contínuo">
+            <meta name="og:description" content="Maciej Pasternacki contó cómo, con componentes ya existentes y otros que ha creado él, se puede construir una cadena de empaquetamiento contínuo.
+
+El principal problema al que se enfrenta, es que nece">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Empaquetado Contínuo</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="BDD-moviles-Calabash.html" title="Desarrollo guiado por el comportamiento en móviles con Calabash" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="devops-jenkins.html" title="Devops con Jenkins" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Ignasi Fosch</span>
+                el <time class="published" datetime="2013-02-02T16:00:00+01:00">02/02/2013</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/eventos.html"><span class="badge badge-info">Eventos</span></a>
+        <a class="tag p-category" href="../tags/fosdem.html"><span class="badge badge-info">FOSDEM</span></a>
+        <a class="tag p-category" href="../tags/integracion-continua.html"><span class="badge badge-info">Integración Contínua</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p>Maciej Pasternacki <a class="reference external" href="https://fosdem.org/2013/schedule/event/continuous_packaging_pipeline/">contó</a> cómo, con componentes ya existentes y otros que ha creado él, se puede construir una cadena de empaquetamiento contínuo.</p>
+<!-- TEASER_END -->
+<p>El principal problema al que se enfrenta, es que necesita crear paquetes de instalación para distintos sistemas con todas las dependencias necesarias. Como hacerlo siguiendo las normas de cada distribución y método de empaquetamiento es altamente costoso, se ha creado un proceso utilizando las siguientes herramientas:</p>
+<ul class="simple">
+<li>
+<a class="reference external" href="https://github.com/3ofcoins/vendorificator">Vendorificator</a>: Es una herramienta, creada por el mismo Maciej, para tener las dependencias de cada proyecto junto al mismo. Utiliza definiciones de los paquetes que se pueden compartir entre los proyectos.</li>
+<li>
+<a class="reference external" href="https://github.com/3ofcoins/metarake">MetaRake</a>: Es una extensión de Rake que permite a éste encontrar módulos que necesitan ser compilados en el mismo repositorio del proyecto en el que está trabajando, compilándolos, incluyéndolos y vinculándolos al proyecto. También está creado por Maciej.</li>
+<li>
+<a class="reference external" href="https://github.com/3ofcoins/evoker">Evoker</a>: La última herramienta que Maciej ha incluido, es otro complemento de Rake que permite descargar y gestionar dependencias externas de cada proyecto, parcheándolo o modificándolo como más convenga.</li>
+<li>
+<a class="reference external" href="https://github.com/jordansissel/fpm">FPM</a>: La siguiente herramienta, obra de <a class="reference external" href="http://www.semicomplete.com/">Jordan Sissel</a>, es una utilidad bastante conocida que permite crear y convertir paquetes entre diferentes formatos y tipos, como por ejemplo, una gema de Ruby en un .deb instalable.</li>
+<li>
+<a class="reference external" href="https://github.com/rcrowley/freight">Freight</a>: Ésta herramienta, creación de <a class="reference external" href="http://rcrowley.org/">Richard Crowley</a>, sirve para mantener un repositorio de tipo Debian/Ubuntu.</li>
+</ul>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="BDD-moviles-Calabash.html" rel="prev">Desarrollo guiado por el comportamiento en móviles con Calabash</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="devops-jenkins.html" rel="next">Devops con Jenkins</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/empaquetado-continuo.html",
+        disqus_title="Empaquetado Cont\u00ednuo",
+        disqus_identifier="cache/posts/2013-02-02-natx-empaquetado-continuo.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

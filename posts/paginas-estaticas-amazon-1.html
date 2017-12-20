@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Páginas estáticas en Amazon - 1 | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/paginas-estaticas-amazon-1.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Páginas estáticas en Amazon - 1">
+            <meta name="og:description" content="Tal como comentamos el pasado artículo Publicación estática el uso de sitios estáticos es cada vez más habitual por seguridad o por su eficiencia tal como comentaba Ersiko en ese mismo artículo, por o">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Páginas estáticas en Amazon - 1</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="bbc-micro-bit.html" title="BBC micro:bit" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="estamos%E2%80%94aqu%C3%AD-por-dinero.html" title="Todos estamos aquí por el dinero" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Javier Arellano</span>
+                el <time class="published" datetime="2016-07-26T12:00:00+02:00">26/07/2016</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/amazon-ws.html"><span class="badge badge-info">Amazon WS</span></a>
+        <a class="tag p-category" href="../tags/automatizacion.html"><span class="badge badge-info">Automatización</span></a>
+        <a class="tag p-category" href="../tags/herramientas.html"><span class="badge badge-info">Herramientas</span></a>
+        <a class="tag p-category" href="../tags/web.html"><span class="badge badge-info">Web</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p>Tal como comentamos el pasado artículo <a href="http://www.entredevyops.es/posts/publicacion-estatica.html"><em>Publicación estática</em></a> el uso de sitios estáticos es cada vez más habitual por seguridad o por su eficiencia tal como comentaba <em>Ersiko</em> en ese mismo artículo, por otro lado tenemos a Amazon como proveedor y líder indiscutible en servicios de computación y en este artículo los vamos a unir.</p>
+<!-- TEASER_END -->
+
+<p>Usando algunos de los servicios de Amazon pondremos nuestra página estática online, no intentamos explicar todo el funcionamiento de Amazon ya que sería una tarea titánica para este pequeño artículo, solamente nos centraremos en los servicios necesarios para exponer una página estática.</p>
+<h3>Consola web</h3>
+<p><img src="../images/paginas-estaticas-amazon-1.png" class="border align-center" alt="Amazon entrada"></p>
+<p>Primero nos damos de alta en AWS en <a href="https://aws.amazon.com/">aws.amazon.com</a>, con un pequeño formulario proporcionando nuestros datos y aunque tenemos unos cuantos servicios gratuitos durante el primer año, en este tutorial no entramos en eso ya que alguno de los servicios que vamos a usar no son gratuitos. <strong>AVISO:</strong> recordamos que aunque Amazon tiene servicios gratuitos, alguno de los servicios tratados en este pequeño tutorial comportan un cargo económico. </p>
+<p>Una vez finalizada la entrada de datos podemos acceder a nuestro nuevo servicio y la pantalla principal será similar a esta:</p>
+<p><img src="../images/paginas-estaticas-amazon-3.png" class="border align-center" alt="AWS principal"></p>
+<p>Si encontráis otra pantalla, probablemente es que estáis usando la versión antigua ya que vuestro usuario se dio de alta hace tiempo. El nombre de los servicios es el mismo y la única diferencia la localización en la pantalla. </p>
+<h3>IAM</h3>
+<p><em>IAM o Identity and Access Management</em> es el sistema de autenticación que permite dar acceso y permisos tanto a usuarios, como a las máquinas, por lo que a través de estos roles podemos controlar que un usuario tenga permitido hacer unas acciones pero no otras.</p>
+<p>Con la seguridad en mente y aunque no es obligatorio realizar este punto, nuestra recomendación es añadir la protección <em>multifactor</em> a la cuenta. Como se puede ver en la siguiente imagen de la entrada del IAM hay unos iconos amarillos, pero cada uno de ellos aumenta el nivel de seguridad por lo que todos tendrían que estar en verde:  </p>
+<p><img src="../images/paginas-estaticas-amazon-4.png" class="border align-center" alt="amazon IAM"></p>
+<p>Desplegamos el segundo icono (primer amarillo) y activamos el <em>multifactor</em> (MFA), seleccionando la opción de “dispositivo virtual” podemos utilizar una de las aplicaciones compatibles en el móvil y capturar el QR con el móvil. (en esta imagen ha sido vaciada por el centro) </p>
+<p><img src="../images/paginas-estaticas-amazon-5.png" class="border align-center" alt="amazon MFA nuevo dispositivo"></p>
+<p>En el móvil tenemos que tener instalado una de estas aplicaciones compatibles con Amazon AWS:</p>
+<ul>
+<li>Android: Google Authenticator;  Authy</li>
+<li>iPhone: Google Authenticator</li>
+<li>Windows Phone: Authenticator</li>
+<li>Blackberry: Google Authenticator</li>
+</ul>
+<p>Esto hará que cuando entremos en la página nos pida el password y también el número que aparece en ese momento en la pantalla del móvil, como se muestra en la imagen:</p>
+<p><img src="../images/paginas-estaticas-amazon-6.png" class="border align-center" alt="Authenticator movil"></p>
+<p>Como se puede ver es una gran ayuda y muchos entornos usan esta autenticación por dos pasos, siempre que se pueda activar es una gran ayuda para la seguridad de los entornos.</p>
+<p>Repasando lo realizado hasta el momento, ya tenemos una cuenta en Amazon AWS y una forma segura para entrar, ahora necesitamos un espacio para guardar los ficheros y una forma de acceder a ellos, del listado servicios de Amazon nos fijaremos en: S3, Route53 </p>
+<h3>S3 o Simple Storage Service</h3>
+<p>S3, como hemos dicho, es el espacio donde dejar nuestros ficheros. El funcionamiento de s3 esa través de <em>buckets</em>, o dicho de otra forma, separaciones lógicas y en el caso que tenemos se han separado por dominios, vamos a crear un <em>bucket</em> llamado dondever.es aquí vamos a alojar los ficheros de la página web.</p>
+<p><img src="../images/paginas-estaticas-amazon-7.png" class="border align-center" alt="s3 bucket nuevo"></p>
+<p>Una vez creado lo seleccionamos y podemos ver a la derecha <em>Static website hosting</em> al marcarlo se despliega y podemos seleccionar <em>Enable website hosting</em> le añadimos el nombre del fichero que queramos como inicio de nuestra página que habitualmente será index.html </p>
+<p><img src="../images/paginas-estaticas-amazon-8.png" class="border align-center" alt="s3 bucket propiedades web"></p>
+<p>Una vez realizado este cambio podemos guardar la dirección URL que nos marca como <em>Endpoint</em> en este caso es:</p>
+<p>dondever.es.s3-website-eu-west-1.amazonaws.com</p>
+<p>Esto significa que si en el navegador ponemos la URL que nos indique podemos acceder a una bonita página de error ya que no hay ningún fichero index.html en el <em>bucket</em>, de hecho no hay ningún fichero, por lo que vamos a subir un fichero entrando en el <em>bucket</em> y ejecutando la acción <em>upload</em> del botón <em>Actions</em>, seleccionamos el fichero o los ficheros que queremos subir y obtendremos algo parecido a:</p>
+<p><img src="../images/paginas-estaticas-amazon-9.png" class="border align-center" alt="s3 bucket subido"></p>
+<p>Y si lo probamos ahora, aparece un bonito error que nos indica que no tenemos permisos, por lo que tenemos que ir al botón <em>Permissions</em> del <em>bucket</em></p>
+<p><img src="../images/paginas-estaticas-amazon-10.png" class="border align-center" alt="s3 bucket permisos"></p>
+<p>y al acceder a <em>Add bucket policy</em> nos aparecerá un recuadro donde tenemos que poner el siguiente texto:</p>
+<pre class="code literal-block"><span class="p">{</span>
+  <span class="s">"Version"</span><span class="o">:</span><span class="s">"2012-10-17"</span><span class="p">,</span>
+  <span class="s">"Statement"</span><span class="o">:</span><span class="p">[{</span>
+    <span class="s">"Sid"</span><span class="o">:</span><span class="s">"PublicReadGetObject"</span><span class="p">,</span>
+        <span class="s">"Effect"</span><span class="o">:</span><span class="s">"Allow"</span><span class="p">,</span>
+      <span class="s">"Principal"</span><span class="o">:</span> <span class="s">"*"</span><span class="p">,</span>
+      <span class="s">"Action"</span><span class="o">:</span><span class="p">[</span><span class="s">"s3:GetObject"</span><span class="p">],</span>
+      <span class="s">"Resource"</span><span class="o">:</span><span class="p">[</span><span class="s">"arn:aws:s3:::dondever.es/*"</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre>
+
+
+<p>En este caso dondever.es es el nombre del <em>bucket</em> que hemos creado y por lo tanto, se ha de sustituir por el nombre de cada uno de los <em>buckets</em> que tengamos. </p>
+<p>Ahora sí, ya podemos acceder a la URL y ver nuestro index.html correctamente, pero realmente el nombre : dondever.es.s3-website-eu-west-1.amazonaws.com no es muy bonito, para ello podemos usar un dominio propio, por ello presentamos <em>Route53</em>.</p>
+<h3>Route53</h3>
+<p>No es necesario usar <em>Route53</em> para realizar este paso, ya que se puede usar un servicio DNS externo que nos apunte el dominio que queramos hacia nuestro <em>bucket</em> de S3 a través de un registro DNS de tipo CNAME. Pero para explicar el funcionamiento DNS de Amazon lo que haremos será usar <em>Route53</em>.</p>
+<p>Para ello crearemos una "Hosted Zone" mediante el botón "Create Hosted Zone"</p>
+<p><img src="../images/paginas-estaticas-amazon-11.png" class="border align-center" alt="route53 nueva zona"></p>
+<p>Le indicamos el dominio y el tipo dejamos "Public Hosted Zone" , para que sea accesible desde internet.</p>
+<p><img src="../images/paginas-estaticas-amazon-12.png" class="border align-center" alt="route53 registros"></p>
+<p>Al hacer esto se habrán creado 2 registros, uno de ellos es NS y el otro indica SOA. El que nos interesa es el NS, con los 4 servidores que aparecen en el registro NS nos iremos a nuestro registrador de dominio y le indicaremos los servidores que nos ha proporcionado Amazon</p>
+<p><img src="../images/paginas-estaticas-amazon-13.png" class="border align-center" alt="dondominio"></p>
+<p>De esa forma <em>Route53</em> ya puede gestionar los subdominios, entonces cuando los servidores DNS se propaguen (pueden tardar días) las peticiones finalizaran en Amazon. Pero ahora lo que falta es decir a Amazon que lo que hemos creado en <em>Route53</em> y lo que hay en S3 se han de unir.</p>
+<p>Vamos a la consola de <em>Route53</em> y añadimos un "Record Set", pero este registro es  muy especial, es del tipo <em>Alias</em>, se le marca del tipo "A" y en la parte de abajo Alias "Yes" entonces en "Alias target" nos muestra todos los <em>endpoint</em> de S3, por lo que seleccionamos el que nos interesa</p>
+<p><img src="../images/paginas-estaticas-amazon-14.png" class="border align-center" alt="route53 alias"></p>
+<p>De esa forma el registro del dominio, va a buscar los datos al <em>bucket</em> S3. Y finalmente nos quedan estos registros:</p>
+<p><img src="../images/paginas-estaticas-amazon-15.png" class="border align-center" alt="route53 alias www"></p>
+<p>Con esto ya somos capaces de ver el resultado una vez se han propagado los registros DNS.</p>
+<p><img src="../images/paginas-estaticas-amazon-16.png" class="border align-center" alt="route53 listado"></p>
+<p>En la segunda parte de este tutorial tratará de la realización de un blog con una herramienta de generación de contenido estático, por lo que tendremos que profundizar en el funcionamiento de IAM para no tener que subir los ficheros a través de la consola, sino usar un sistema automático.</p>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="bbc-micro-bit.html" rel="prev">BBC micro:bit</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="estamos%E2%80%94aqu%C3%AD-por-dinero.html" rel="next">Todos estamos aquí por el dinero</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/paginas-estaticas-amazon-1.html",
+        disqus_title="P\u00e1ginas est\u00e1ticas en Amazon - 1",
+        disqus_identifier="cache/posts/2016-07-25-jare-publicacion-estatica-amazon-1.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

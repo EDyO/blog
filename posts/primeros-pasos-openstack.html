@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Primeros pasos con OpenStack | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/primeros-pasos-openstack.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Primeros pasos con OpenStack">
+            <meta name="og:description" content="Continuando con nuestro pequeño laboratorio OpenStack necesitamos crear las nuevas redes.
+
+source /root/keystonerc_demo
+neutron router-create router
+neutron net-create private
+neutron subnet-create pr">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Primeros pasos con OpenStack</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="ssh-acceso-remoto-servidores.html" title="SSH: Acceso remoto a servidores" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="digitalocean-nueva-region-londres.html" title="DigitalOcean anuncia nueva región en Londres" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Javier Arellano</span>
+                el <time class="published" datetime="2014-07-09T04:14:00+02:00">09/07/2014</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/laboratorio.html"><span class="badge badge-info">Laboratorio</span></a>
+        <a class="tag p-category" href="../tags/openstack.html"><span class="badge badge-info">OpenStack</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p>Continuando con nuestro pequeño laboratorio OpenStack necesitamos crear las nuevas redes.</p>
+<pre class="code bash literal-block">
+<span class="nb">source</span> /root/keystonerc_demo
+neutron router-create router
+neutron net-create private
+neutron subnet-create private 10.0.0.0/24 --name private_subnet
+neutron router-interface-add router private_subnet
+neutron net-create public --router:external<span class="o">=</span>True
+neutron subnet-create public 192.168.0.0/24 --name public_subnet --enable_dhcp<span class="o">=</span>False --allocation-pool <span class="nv">start</span><span class="o">=</span>192.168.0.129,end<span class="o">=</span>192.168.0.254 --gateway<span class="o">=</span>192.168.0.1
+neutron router-gateway-set router public
+</pre>
+<!-- TEASER_END -->
+<p>Una vez ya tenemos redes, una externa (192.168.0.0/24) que pertenece a nuestra red exterior y una interna (10.0.0.0/24) para uso de las instancias de OpenStack. Una vez creadas las redes añadimos los permisos del SSH y del ping a la configuración de seguridad. Los <em>security groups</em> son firewalls que actúan sobre el objeto al que hagamos referencia, es decir, tanto se puede aplicar a un puerto como a una máquina.</p>
+<pre class="code bash literal-block">
+<span class="nb">source</span> /root/keystonerc_demo
+neutron security-group-rule-create --protocol icmp --direction ingress default
+neutron security-group-rule-create --protocol tcp --port-range-min 22 --port-range-max 22 --direction ingress default
+</pre>
+<p>El comando <em>source</em> no es necesario si ya se ha ejecutado en la misma sesión. ya que se trata de variables de entorno.</p>
+<p>También necesitamos crear las imágenes, las imágenes son los modelos en los que se van a copiar creando instancias del modelo base. En mi caso en vez de crear nuevas imágenes me bajo 2 creadas:</p>
+<pre class="code bash literal-block">
+wget http://download.cirros-cloud.net/0.3.2~pre2/cirros-0.3.2~pre2-x86_64-disk.img
+glance image-create --name CirrOS --disk-format qcow2 --container-format bare --is-public <span class="nb">true</span> &lt; cirros-0.3.2*
+
+wget http://repos.fedorapeople.org/repos/openstack/guest-images/centos-6.5-20140117.0.x86_64.qcow2
+glance image-create --name <span class="s2">"CentOS 6.5"</span> --disk-format qcow2 --container-format bare --is-public <span class="nb">true</span> &lt; centos-6.5*
+</pre>
+<p>CirrOS es un minisistema creado para realizar test en sistemas cloud, como OpenStack. CentOS es un sistema similar a RedHat y va a ser el sistema base que voy ha utilizar de momento.</p>
+<p>Y ya estamos preparados para realizar la primera prueba con los comandos. El primero llama al fichero <em>lab1.yaml</em> que se trata del listado abajo.</p>
+<pre class="code bash literal-block">
+<span class="nv">SUBNET_UUID_PRIVATE</span><span class="o">=</span><span class="sb">`</span>neutron subnet-list| grep private| awk <span class="s1">'{print $2 }'</span><span class="sb">`</span>
+<span class="nv">NET_UUID_PRIVATE</span><span class="o">=</span><span class="sb">`</span>neutron net-list| grep private| awk <span class="s1">'{print $2 }'</span><span class="sb">`</span>
+<span class="nv">SUBNET_UUID_PUBLIC</span><span class="o">=</span><span class="sb">`</span>neutron subnet-list| grep public| awk <span class="s1">'{print $2 }'</span><span class="sb">`</span>
+<span class="nv">NET_UUID_PUBLIC</span><span class="o">=</span><span class="sb">`</span>neutron net-list| grep public| awk <span class="s1">'{print $2 }'</span><span class="sb">`</span>
+
+heat stack-create lab1 --template-file<span class="o">=</span>lab1.yaml --parameters<span class="o">=</span><span class="s2">"image=CentOS 6.5;flavor=m1.small;key_name=cloud;public_net_id=$NET_UUID_PUBLIC;private_net_id=$NET_UUID_PRIVATE;private_subnet_id=$SUBNET_UUID_PRIVATE"</span>
+</pre>
+<pre class="code yaml literal-block">
+<span class="l-Scalar-Plain">heat_template_version</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">2013-05-23</span>
+
+<span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="p-Indicator">&gt;</span>
+  <span class="no">HOT template to deploy my first server</span>
+
+<span class="l-Scalar-Plain">parameters</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">key_name</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">string</span>
+    <span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Name of keypair to assign to servers</span>
+  <span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">string</span>
+    <span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Name of image to use for servers</span>
+  <span class="l-Scalar-Plain">flavor</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">string</span>
+    <span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Flavor to use for servers</span>
+  <span class="l-Scalar-Plain">public_net_id</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">string</span>
+    <span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="p-Indicator">&gt;</span>
+      <span class="no">ID of public network for which floating IP addresses will be allocated</span>
+  <span class="l-Scalar-Plain">private_net_id</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">string</span>
+    <span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ID of private network into which servers get deployed</span>
+  <span class="l-Scalar-Plain">private_subnet_id</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">string</span>
+    <span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ID of private sub network into which servers get deployed</span>
+
+<span class="l-Scalar-Plain">resources</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">server1</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">OS::Nova::Server</span>
+    <span class="l-Scalar-Plain">properties</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">name</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Server1</span>
+      <span class="l-Scalar-Plain">image</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">get_param</span><span class="p-Indicator">:</span> <span class="nv">image</span> <span class="p-Indicator">}</span>
+      <span class="l-Scalar-Plain">flavor</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">get_param</span><span class="p-Indicator">:</span> <span class="nv">flavor</span> <span class="p-Indicator">}</span>
+      <span class="l-Scalar-Plain">key_name</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">get_param</span><span class="p-Indicator">:</span> <span class="nv">key_name</span> <span class="p-Indicator">}</span>
+      <span class="l-Scalar-Plain">networks</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">port</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">get_resource</span><span class="p-Indicator">:</span> <span class="nv">server1_port</span> <span class="p-Indicator">}</span>
+
+  <span class="l-Scalar-Plain">server1_port</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">OS::Neutron::Port</span>
+    <span class="l-Scalar-Plain">properties</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">network_id</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">get_param</span><span class="p-Indicator">:</span> <span class="nv">private_net_id</span> <span class="p-Indicator">}</span>
+      <span class="l-Scalar-Plain">security_groups</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span><span class="nv">grupo_seguridad</span><span class="p-Indicator">]</span>
+      <span class="l-Scalar-Plain">fixed_ips</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">subnet_id</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">get_param</span><span class="p-Indicator">:</span> <span class="nv">private_subnet_id</span> <span class="p-Indicator">}</span>
+
+  <span class="l-Scalar-Plain">server1_floating_ip</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">type</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">OS::Neutron::FloatingIP</span>
+    <span class="l-Scalar-Plain">properties</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">floating_network_id</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">get_param</span><span class="p-Indicator">:</span> <span class="nv">public_net_id</span> <span class="p-Indicator">}</span>
+      <span class="l-Scalar-Plain">port_id</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">get_resource</span><span class="p-Indicator">:</span> <span class="nv">server1_port</span> <span class="p-Indicator">}</span>
+
+<span class="l-Scalar-Plain">outputs</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">server1_private_ip</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">IP address of server1 in private network</span>
+    <span class="l-Scalar-Plain">value</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">get_attr</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">server1</span><span class="p-Indicator">,</span> <span class="nv">first_address</span> <span class="p-Indicator">]</span> <span class="p-Indicator">}</span>
+  <span class="l-Scalar-Plain">server1_public_ip</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">description</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Floating IP address of server1 in public network</span>
+    <span class="l-Scalar-Plain">value</span><span class="p-Indicator">:</span> <span class="p-Indicator">{</span> <span class="nv">get_attr</span><span class="p-Indicator">:</span> <span class="p-Indicator">[</span> <span class="nv">server1_floating_ip</span><span class="p-Indicator">,</span> <span class="nv">floating_ip_address</span> <span class="p-Indicator">]</span> <span class="p-Indicator">}</span>
+</pre>
+<p>Una vez ejecutado el script veremos el progreso de la creación del stack mediante el comando:</p>
+<pre class="code bash literal-block">
+heat stack-list
+</pre>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="ssh-acceso-remoto-servidores.html" rel="prev">SSH: Acceso remoto a servidores</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="digitalocean-nueva-region-londres.html" rel="next">DigitalOcean anuncia nueva región en Londres</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/primeros-pasos-openstack.html",
+        disqus_title="Primeros pasos con OpenStack",
+        disqus_identifier="cache/posts/2014-07-09-jare-primeros-pasos-openstack.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

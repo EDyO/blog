@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Páginas estáticas en Amazon - 2 | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/paginas-estaticas-amazon-2.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Páginas estáticas en Amazon - 2">
+            <meta name="og:description" content="Continuamos con el curso de páginas estáticas de Amazon, pero esta vez vamos a subir las páginas a Amazon. Elegimos un sistema de generación de contenido estático. En la siguiente página hay un listad">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Páginas estáticas en Amazon - 2</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="amazon-linux-si-o-no.html" title="Amazon Linux, ¿sí o no?" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="fail2ban-ssh.html" title="Usando Fail2Ban para securizar SSH" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Javier Arellano</span>
+                el <time class="published" datetime="2016-09-04T12:00:00+02:00">04/09/2016</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/amazon-ws.html"><span class="badge badge-info">Amazon WS</span></a>
+        <a class="tag p-category" href="../tags/automatizacion.html"><span class="badge badge-info">Automatización</span></a>
+        <a class="tag p-category" href="../tags/herramientas.html"><span class="badge badge-info">Herramientas</span></a>
+        <a class="tag p-category" href="../tags/web.html"><span class="badge badge-info">Web</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p>Continuamos con el curso de páginas estáticas de Amazon, pero esta vez vamos a subir las páginas a Amazon. Elegimos un sistema de generación de contenido estático. En la siguiente <a class="reference external" href="https://staticsitegenerators.net">página</a> hay un listado muy extenso de este tipo de software</p>
+<!-- TEASER_END -->
+<p>Para ello usaremos un sistema de generación de páginas  que se llama Nikola. El sistema no es importante, se puede hacer con muchos, para instalar  el que vamos a usar en este caso se ha de visitar su <a class="reference external" href="https://www.getnikola.com/">página web</a>  es un programa realizado en python por lo que los ejemplos que pongo en este artículo han sido probados en Mac y en Linux, y funcionan correctamente en los dos sistemas. Aunque este no intenta ser un manual de nikola, ya que la parte interesante es entender como funcionan los usuarios y los permisos en Amazon.</p>
+<p>Siguiendo el manual creamos un proyecto nuevo:</p>
+<pre class="code bash literal-block">
+<span class="c"># nikola init --demo nikola
+</span>Creating Nikola <span class="nv">Site</span>
+<span class="o">====================</span>
+
+This is Nikola v7.3.0.  We will now ask you a few easy questions about your new site.
+If you <span class="k">do </span>not want to answer and want to go with the defaults instead, simply restart with the <span class="sb">`</span>-q<span class="sb">`</span> parameter.
+--- Questions about the site ---
+Site title <span class="o">[</span>My Nikola Site<span class="o">]</span>:
+Site author <span class="o">[</span>Nikola Tesla<span class="o">]</span>:
+Site author<span class="sb">`</span>s e-mail <span class="o">[</span>n.tesla@example.com<span class="o">]</span>:
+Site description <span class="o">[</span>This is a demo site <span class="k">for </span>Nikola.<span class="o">]</span>:
+Site URL <span class="o">[</span>http://getnikola.com/<span class="o">]</span>: http://blog.dondever.es
+--- Questions about languages and locales ---
+We will now ask you to provide the list of languages you want to use.
+Please list all the desired languages, comma-separated, using ISO 639-1 codes.  The first language will be used as the default.
+Type <span class="s1">'?'</span> <span class="o">(</span>a question mark, sans quotes<span class="o">)</span> to list available languages.
+Language<span class="o">(</span>s<span class="o">)</span> to use <span class="o">[</span>en<span class="o">]</span>: es
+
+Please choose the correct <span class="nb">time </span>zone <span class="k">for </span>your blog. Nikola uses the tz database.
+You can find your <span class="nb">time </span>zone here:
+http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+Time zone <span class="o">[</span>Europe/Madrid<span class="o">]</span>:
+    Current <span class="nb">time </span>in Europe/Madrid: 19:14:21
+Use this <span class="nb">time </span>zone? <span class="o">[</span>Y/n<span class="o">]</span> y
+--- Questions about comments ---
+You can configure comments now.  Type <span class="s1">'?'</span> <span class="o">(</span>a question mark, sans quotes<span class="o">)</span> to list available comment systems.  If you <span class="k">do </span>not want any comments, just leave the field blank.
+Comment system:
+
+That<span class="sb">`</span>s it, Nikola is now configured.  Make sure to edit conf.py to your liking.
+If you are looking <span class="k">for </span>themes and addons, check out http://themes.getnikola.com/ and http://plugins.getnikola.com/.
+Have fun!
+<span class="o">[</span>2016-09-04T17:14:23Z<span class="o">]</span> INFO: init: A new site with example data has been created at nikola.
+<span class="o">[</span>2016-09-04T17:14:23Z<span class="o">]</span> INFO: init: See README.txt in that folder <span class="k">for </span>more information.
+</pre>
+<p>entramos en el directorio y ejecutamos el comando de generar contenido que genera todos los ficheros en el subdirectorio output</p>
+<pre class="code bash literal-block">
+<span class="c"># nikola  build
+</span>Scanning posts....done!
+.  render_archive:output/2012/index.html
+.  render_archive:output/archive.html
+.  copy_assets:output/assets/css/bootstrap-theme.css
+.  copy_assets:output/assets/css/bootstrap-theme.css.map
+<span class="o">[</span>...<span class="o">]</span>
+.  create_bundles:output/assets/js/all.js
+.  sitemap:output/sitemap.xml
+.  sitemap:output/sitemapindex.xml
+.  robots_file:output/robots.txt
+</pre>
+<p>Si lo queremos ver en local podemos ejecutar :</p>
+<pre class="code bash literal-block">
+<span class="c">#nikola serve
+</span><span class="o">[</span>2016-09-04T17:18:02Z<span class="o">]</span> INFO: serve: Serving HTTP on 0.0.0.0 port 8000...
+</pre>
+<p>Podremos ver una página de muestra en un navegador apuntando a la dirección: <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a></p>
+<p>Esta pagina generada es una página de ejemplo que la podemos usar tal como está para nuestro propósito</p>
+<p>Ahora crearemos un <em>bucket</em> que alojará de este proyecto, se llamará blog.dondever.es  y lo crearemos tal como se comentó en <a class="reference external" href="http://www.entredevyops.es/posts/paginas-estaticas-amazon-1.html">la anterior parte de este artículo</a>, recordad que se ha de permitir que sea un <em>Static website hosting</em> , los permisos, el registro en route53, etc.</p>
+<p>Ahora crearemos el usuario para copiar los ficheros en AWS en la sección IAM apartado <em>Users</em> y botón <em>Create user</em>.</p>
+<p>Crearemos un usuario llamado "deploy", una vez creado nos muestra por pantalla  el <em>Access Key ID</em> y el <em>Secret Access Key</em>  es muy importante guardar los datos por que no hay forma de volver a  recuperarlos, por lo que se tendría que volver a recrear en el caso de perdida.</p>
+<pre class="code bash literal-block">
+Access Key ID: AKIAJBFNFTW2YXEYZWBA
+Secret Access Key: gu7TAatrFc18TqxUfEu+f61TStm1yvtHQRUCdJt
+</pre>
+<p>Por defecto los usuarios no tienen password, sino que se usa la pareja de claves como identificador y autenticador. Una vez se crea el password el usuario podrá acceder a la consola si tiene los permisos adecuados. un usuario recién creado no tiene permisos, sino que necesita que explícitamente le añadamos los permisos para cada uno de los servicios que queramos que el usuario pueda gestionar.</p>
+<p>Ahora que tenemos las credenciales del usuario falta añadirle permisos para que pueda subir ficheros al <em>bucket</em>, esto lo hacemos en las propiedades del usuario, pestaña <em>permissions</em>, <em>inline policies</em> y como no hay ninguna vamos a "click here" en la siguiente pantalla elegimos <em>custom policies</em> en <em>policy name</em> ponemos algun nombre descriptivo, por ejemplo "politica_deploy_blog" y en el cuerpo copiamos el texto:</p>
+<pre class="code json literal-block">
+<span class="p">{</span>
+    <span class="nt">"Version"</span><span class="p">:</span> <span class="s2">"2012-10-17"</span><span class="p">,</span>
+    <span class="nt">"Statement"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">"Effect"</span><span class="p">:</span> <span class="s2">"Allow"</span><span class="p">,</span>
+            <span class="nt">"Action"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"s3:PutObject"</span><span class="p">,</span>
+                <span class="s2">"s3:ListObjects"</span>
+            <span class="p">],</span>
+            <span class="nt">"Resource"</span><span class="p">:</span> <span class="s2">"arn:aws:s3:::blog.dondever.es/*"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">"Effect"</span><span class="p">:</span> <span class="s2">"Allow"</span><span class="p">,</span>
+            <span class="nt">"Action"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"s3:ListBucket"</span>
+            <span class="p">],</span>
+            <span class="nt">"Resource"</span><span class="p">:</span> <span class="s2">"arn:aws:s3:::blog.dondever.es"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre>
+<p>Teniendo en cuenta que se ha de cambiar el <em>bucket</em> por el que estéis usando.</p>
+<p>Ahora lo único que falta es copiar los ficheros desde nuestro directorio al <em>bucket</em>, para ello tenemos que instalar el CLI de <a class="reference external" href="https://aws.amazon.com/es/cli/">amazon</a>, ejecutando:</p>
+<pre class="code bash literal-block">
+sudo pip install awscli
+</pre>
+<p>una vez instalado podemos ejecutar:</p>
+<pre class="code bash literal-block">
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">AWS_ACCESS_KEY_ID</span><span class="o">=</span>AKIAJBFNFTW2YXEYZWBA
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">AWS_SECRET_ACCESS_KEY</span><span class="o">=</span>gu7TAatrFc18TqxUfEu+f61TStm1yvtHQRUCdJt
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">AWS_DEFAULT_REGION</span><span class="o">=</span>eu-west-1
+</pre>
+<p>De esta forma ya tiene la información de las credenciales de usuario y la región donde actuar, y podemos ejecutar la subida de los datos:</p>
+<pre class="code bash literal-block">
+<span class="nv">$ </span>aws s3 sync output/  s3://blog.dondever.es
+upload: output/2012/index.html to s3://blog.dondever.es/2012/index.html
+upload: output/archive.html to s3://blog.dondever.es/archive.html
+upload: output/assets/css/bootstrap-theme.css.map to s3://blog.dondever.es/assets/css/bootstrap-theme.css.map
+upload: output/assets/css/code.css to s3://blog.dondever.es/assets/css/code.css
+<span class="o">[</span>...<span class="o">]</span>
+upload: output/favicon.ico to s3://blog.dondever.es/favicon.ico
+upload: output/stories/a-study-in-scarlet.txt to s3://blog.dondever.es/stories/a-study-in-scarlet.txt
+upload: output/stories/a-study-in-scarlet.html to s3://blog.dondever.es/stories/a-study-in-scarlet.html
+</pre>
+<p>Y ya tenemos el blog funcionando correctamente en Amazon. Próximamente añadiremos un poco más de automatización a poder subir páginas a AWS.</p>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="amazon-linux-si-o-no.html" rel="prev">Amazon Linux, ¿sí o no?</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="fail2ban-ssh.html" rel="next">Usando Fail2Ban para securizar SSH</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/paginas-estaticas-amazon-2.html",
+        disqus_title="P\u00e1ginas est\u00e1ticas en Amazon - 2",
+        disqus_identifier="cache/posts/2016-09-04-jare-publicacion-estatica-amazon-2.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

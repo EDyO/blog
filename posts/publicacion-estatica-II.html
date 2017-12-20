@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Publicación estática (II) | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/publicacion-estatica-II.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Publicación estática (II)">
+            <meta name="og:description" content="Han pasado casi tres meses desde que se publicó el primer artículo sobre publicación estática en EntreDevYOps, en el que se prometía un ejemplo...
+Lo prometido es deuda.
+Espero que el interés sobre el">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Publicación estática (II)</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="podcast-episodio-18.html" title="Podcast Episodio 18: Entrevista a Xavi Soler" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="tls-estandares-lobbies.html" title="TLS: de estándares y lobbies" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Ignasi Fosch</span>
+                el <time class="published" datetime="2016-10-02T23:00:00+02:00">02/10/2016</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/automatizacion.html"><span class="badge badge-info">Automatización</span></a>
+        <a class="tag p-category" href="../tags/herramientas.html"><span class="badge badge-info">Herramientas</span></a>
+        <a class="tag p-category" href="../tags/web.html"><span class="badge badge-info">Web</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p><img src="../images/publicacion-estatica-header.png" class="align-left" alt="Publicación estática" height="180"></p>
+<p>Han pasado casi tres meses desde que se publicó el <a href="http://www.entredevyops.es/posts/publicacion-estatica.html">primer artículo sobre publicación estática</a> en <a href="http://www.entredevyops.es">EntreDevYOps</a>, en el que se prometía un ejemplo...
+Lo prometido es deuda.
+Espero que el interés sobre el tema aún siga vigente...</p>
+<p>En este artículo, se muestra, paso a paso, y con un ejemplo real, cómo realizar una publicación estática, con <a href="http://gohugo.io">Hugo</a>, usando <a href="http://travis-ci.org">Travis</a>, en <a href="https://pages.github.com/">GitHub Pages</a>.</p>
+<!-- TEASER_END -->
+
+<p>El resultado será un sitio web con una sola página, una especie de <a href="https://about.me/">about.me</a>, cuyas actualizaciones se harán mediante <code>push</code> a un repositorio, que provocarán, de forma automática, su publicación en <a href="https://pages.github.com/">GitHub Pages</a>.</p>
+<h2>Requisitos</h2>
+<p>Los requisitos son los siguientes:</p>
+<ul>
+<li>Dominio: En el caso expuesto, se utiliza <code>midominio.es</code>.</li>
+<li>Cuenta de <a href="https://github.com/">GitHub</a>: El artículo trabaja con la cuenta <code>cuenta</code>.</li>
+<li>Acceso a <a href="http://travis-ci.org">Travis</a>.</li>
+<li>
+<a href="http://golang.org">Go</a> instalado.</li>
+<li>Cuenta en <a href="https://analytics.google.com">Google Analytics</a>, aunque sería opcional.</li>
+</ul>
+<h2>Instalar hugo</h2>
+<p>Como con cualquier herramienta en <a href="http://golang.org">Go</a>, instalar <a href="http://gohugo.io">Hugo</a> es tan sencillo como usar <code>go get</code>:</p>
+<pre class="code literal-block">go get -u -v git@github.com/spf13/hugo
+</pre>
+
+
+<h2>Creación del nuevo sitio</h2>
+<p>Para usar <a href="https://pages.github.com/">GitHub Pages</a>, con una cuenta de usuario o de organización, hay que usar el nombre <code>cuenta.github.io</code>.
+Crear un nuevo sitio con <a href="http://gohugo.io">Hugo</a>, es muy sencillo:</p>
+<pre class="code literal-block">hugo new site cuenta.github.io
+</pre>
+
+
+<p>A continuación, se convierte la estructura creada por <a href="http://gohugo.io">Hugo</a>, en un repositorio <code>git</code>.
+Como <a href="https://pages.github.com/">GitHub Pages</a>, para usuarios y organizaciones, utiliza la rama <code>master</code>, convendrá crear una rama distinta donde utilizar <a href="http://gohugo.io">Hugo</a>:</p>
+<pre class="code literal-block"><span class="nb">cd </span>cuenta.github.io
+git init .
+git checkout -b edition
+</pre>
+
+
+<h2>Instalar el tema</h2>
+<p>Para el ejemplo utilizado, se ha elegido un tema de <a href="http://gohugo.io">Hugo</a>, llamado <a href="http://themes.gohugo.io/hugo-identity-theme/">Identity</a>, que ya incluye un <code>config.toml</code> base, pero <a href="http://themes.gohugo.io/">hay muchos otros temas disponibles</a>.
+Además, la instalación se hace usando <a href="https://github.com/blog/2104-working-with-submodules">submódulos de git</a>:</p>
+<pre class="code literal-block">mkdir themes
+git submodule add https://github.com/aerohub/hugo-identity-theme themes/hugo-identity-theme
+cp themes/hugo-identity-theme/exampleSite/config.toml .
+</pre>
+
+
+<h2>Ver la versión local</h2>
+<p>Mientras se edite el sitio localmente, se puede visualizar con el subcomando <code>server</code> de <a href="http://gohugo.io">Hugo</a>:</p>
+<pre class="code literal-block">hugo server -t hugo-identity-theme
+</pre>
+
+
+<p>Una vez ejecutándose, se puede visitar la versión local apuntando un navegador a <code>http://localhost:1313</code>.
+Como con otras herramientas similares, este comando refresca automáticamente los cambios en el código.</p>
+<h2>Configurar la pubicación automática</h2>
+<p>A continuación, se configura el repositorio para ser usado con <a href="http://travis-ci.org">Travis</a>, añadiendo el fichero <code>.travis.yml</code> con el contenido siguiente:</p>
+<pre class="code literal-block"><span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">go</span>
+<span class="l-Scalar-Plain">sudo</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
+<span class="l-Scalar-Plain">branches</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">only</span><span class="p-Indicator">:</span>
+    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">edition</span>
+
+<span class="l-Scalar-Plain">go</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">1.6</span>
+
+<span class="l-Scalar-Plain">install</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">go get -u github.com/spf13/hugo</span>
+
+<span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">rm -rf public</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">hugo -t hugo-identity-theme</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git config --global user.email "cuenta+travis@gmail.com"</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git config --global user.name "Travis for midominio.es"</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git checkout --orphan master</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">cp -R public/* .</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">rm -rf public bin content static .gitignore .travis.yml config.toml README.md themes</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">echo "www.midominio.es" &gt; CNAME</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git add .</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git rm -rf content themes config.toml .gitmodules .travis.yml</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git commit -m "Publishing"</span>
+  <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">git push "https://${GH_TOKEN}@github.com/cuenta/cuenta.github.io.git" master -f &gt;/dev/null 2&gt;&amp;1</span>
+</pre>
+
+
+<p>El contenido del fichero <code>.travis.yml</code> detalla que para el despliegue, se utilizará <a href="http://golang.org">Go</a> 1.6, la rama <code>edition</code>, <a href="http://gohugo.io">Hugo</a>, que habrá que instalar, y los pasos necesarios para construir el contenido estático con el tema elegido, publicando el resultado en la rama <code>master</code> y añadiendo el fichero <code>CNAME</code> con el dominio elegido.</p>
+<p>Ahora, ya se puede hacer el primer <code>commit</code>, incluyendo la carpeta <code>content</code>, necesaria para que <a href="http://gohugo.io">Hugo</a> se ejecute sin problemas:</p>
+<pre class="code literal-block">touch content/.placeholder
+git add .
+git commit -am <span class="s2">"Initial cuenta.github.io commit"</span>
+</pre>
+
+
+<p>El siguiente paso, consiste en crear el repositorio <code>cuenta.github.io</code> en la cuenta de <a href="https://github.com/">GitHub</a> que se vaya a utilizar.
+Conviene que se cree con un fichero <code>README.md</code> para forzar la existencia sin necesitar nada más.
+Una vez creado el repositorio en <a href="https://github.com/">GitHub</a>, ya es posible enlazarlo con la copia local:</p>
+<pre class="code literal-block">git remote add origin git@github:cuenta/cuenta.github.io.git
+git fetch
+git push --set-upstream origin edition
+</pre>
+
+
+<p>Para configurar la ejecución mediante <a href="http://travis-ci.org">Travis</a>, primero hay que conseguir un token de la cuenta de <a href="https://github.com/">GitHub</a>.
+El token sólo necesita tener permiso para operar sobre los repositorios públicos.</p>
+<p><img src="../images/publicacion-estatica-token.png" alt="Permisos del token de GitHub" height="180"></p>
+<p>El siguiente paso es crear la configuración para el repositorio en <a href="http://travis-ci.org">Travis</a>.
+En la configuración hay que marcar que ejecute el código siempre que haya el fichero <code>.travis.yml</code>, y en todos los <code>push</code>.
+Es importante crear la variable de entorno <code>GH_TOKEN</code>, con el token que se ha obtenido de <a href="https://github.com/">GitHub</a>, indicando que no muestre el valor.</p>
+<p><img src="../images/publicacion-estatica-travis.png" alt="Configuración del proyecto en Travis" height="360"></p>
+<h2>Configurar dominio</h2>
+<p>En el DNS del dominio que se quiera utilizar, hay que crear dos registros:
+<em> Un registro <code>CNAME</code> de <code>www.midominio.es</code> que apunte a <code>cuenta.github.io</code>.
+</em> Un registro <code>A</code> de <code>midominio.es</code> que apunte a <code>174.129.25.170</code>.</p>
+<p>Éste último registro a punta a un servicio gratuito de <a href="http://wwwizer.com/naked-domain-redirect">WWWizer</a> que automáticamente redirige el dominio <em>APEX</em> al host <code>www</code>.</p>
+<h2>Primera publicación</h2>
+<p>A continuación, se modifican las primeras líneas del fichero <code>config.toml</code>, con los valores apropiados:</p>
+<pre class="code literal-block"><span class="n">baseurl</span> <span class="o">=</span> <span class="s">"http://www.midominio.es"</span> <span class="err">#</span><span class="n">without</span> <span class="n">ending</span> <span class="n">slash</span>
+<span class="n">languageCode</span> <span class="o">=</span> <span class="s">"es-es"</span>
+<span class="n">theme</span> <span class="o">=</span> <span class="s">"hugo-identity-theme"</span>
+<span class="n">title</span> <span class="o">=</span> <span class="s">"Nombre del sitio"</span>
+</pre>
+
+
+<p>Para hacer la publicación de este cambio, basta con hacer el <code>commit</code> y el <code>push</code>:</p>
+<pre class="code literal-block">git commit -am <span class="s2">"First publication"</span>
+git push
+</pre>
+
+
+<p>Conviene observar que el build se realiza correctamente en <a href="http://travis-ci.org">Travis</a>.</p>
+<h2>Ajustes</h2>
+<p>Finalmente, se pueden ajustar ciertos aspectos de forma muy sencilla.
+Hay que recordar publicar bien tras cada cambio, o una sola vez tras todos los cambios, según se prefiera:</p>
+<pre class="code literal-block">git add .
+git commit -m <span class="s2">"Add my own information"</span>
+git push
+</pre>
+
+
+<h3>Sobreescribir el icono del sitio</h3>
+<p>El tema <a href="http://themes.gohugo.io/hugo-identity-theme/">Identity</a> incluye un icono para el sitio, que probablemente se desee cambiar.
+Lo más directo, en lugar de editar el tema, o hacer una bifurcación, o <code>fork</code>, es utilizar la funcionalidad de sobreescritura de <a href="http://gohugo.io">Hugo</a>:</p>
+<pre class="code literal-block">mkdir -p static/images/icons
+cp /tmp/favicon.ico static/images/icons/.
+</pre>
+
+
+<p>Así, creamos el directorio que corresponde a los iconos, tal y como está definido en el tema, y ponemos el icono con el mismo nombre.</p>
+<h3>Añadir avatar propio</h3>
+<p>De forma similar, se puede configurar el avatar que se quiere usar, con la diferencia de que en este caso se indica el nombre del fichero en la configuración</p>
+<pre class="code literal-block">mkdir -p static/images/avatars
+cp /tmp/mi_avatar.png static/images/avatars/.
+</pre>
+
+
+<pre class="code literal-block"><span class="n">avatar</span> <span class="o">=</span> <span class="s">"mi_avatar.png"</span>
+</pre>
+
+
+<h3>Añadir código Google Analytics</h3>
+<p>El tema <a href="http://themes.gohugo.io/hugo-identity-theme/">Identity</a>, incluye la inserción del código para <a href="https://analytics.google.com">Google Analytics</a>, por lo que, disponiendo del código para el sitio, basta con editar el fichero <code>config.toml</code>, dejando el código deseado:</p>
+<pre class="code literal-block"><span class="n">googleAnalytics</span> <span class="o">=</span> <span class="s">"UA-########-#"</span>
+</pre>
+
+
+<h3>Configurar enlaces a redes sociales</h3>
+<p>Otra funcionalidad del tema, es la inserción de iconos de redes sociales. Por ejemplo, Para insertar la <code>cuenta</code> de Twitter, hay que modificar el fichero <code>config.toml</code>, para que tenga las siguientes líneas:</p>
+<pre class="code literal-block"><span class="k">[[params.social]]</span>
+    <span class="na">title</span> <span class="o">=</span> <span class="s">"Twitter"</span>
+<span class="s">    icon = "fa-twitter"</span>
+<span class="s">    link = "https://twitter.com/cuenta"</span>
+</pre>
+
+
+<h3>Otras configuraciones en <code>config.toml</code>
+</h3>
+<p>Otros valores que se pueden modificar en el <code>config.toml</code>, son <code>name</code>, <code>position</code>, o <code>copyright</code></p>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="podcast-episodio-18.html" rel="prev">Podcast Episodio 18: Entrevista a Xavi Soler</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="tls-estandares-lobbies.html" rel="next">TLS: de estándares y lobbies</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/publicacion-estatica-II.html",
+        disqus_title="Publicaci\u00f3n est\u00e1tica (II)",
+        disqus_identifier="cache/posts/2016-10-03-natx-publicacion-estatica-II.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

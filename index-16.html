@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entre Dev Y Ops es un blog dedicado, principalmente, a administradores de sistemas y devops, en castellano, en el que se irán comentando noticias, trucos y técnicas sobre tecnologias.">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Entre Dev Y Ops (old posts, page 16) | Entre Dev Y Ops</title>
+    
+        <link href="assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+        <article class="postbox clearfix h-entry">
+            <h1 class="p-name"><a href="posts/digitalocean-nueva-region-londres.html" class="u-url">DigitalOcean anuncia nueva región en Londres</a></h1>
+            <div class="meta">
+                <small>
+                        por <span class="author">Eduardo Bellido Bellido</span>
+                    el <time class="published dt-published" datetime="2014-07-15T23:40:00+02:00">15/07/2014</time>
+                    
+                    en     <span itemprop="keywords">
+        <a class="tag p-category" href="tags/cloud.html"><span class="badge badge-info">Cloud</span></a>
+        <a class="tag p-category" href="tags/digital-ocean.html"><span class="badge badge-info">Digital Ocean</span></a>
+    </span>
+
+                </small>
+            </div>
+            <div class="p-summary">
+                <img alt="Digital Ocean" class="align-right" src="images/digitalocean_logo.png" style="width: 200px; height: 122px;">
+<p><a class="reference external" href="http://www.digitalocean.com">DigitalOcean</a> ha anunciado hoy <a class="reference external" href="https://www.digitalocean.com/company/blog/introducing-our-london-region/">en su blog</a> la disponibilidad de una nueva región para la creación de <a class="reference external" href="https://www.digitalocean.com/help/technical/general/">droplets</a> (denominación de este servicio para instancias de servidores), esta nueva región ubicada en Londres es la tercera que este servicio dispone ya en Europa, junto a las dos existentes en Amsterdam.</p>
+<p class="more"><a href="posts/digitalocean-nueva-region-londres.html">Leer más…</a></p>
+            </div>
+                                <a href="posts/digitalocean-nueva-region-londres.html#disqus_thread" data-disqus-identifier="cache/posts/2014-07-15-edubxb-digitalocean-nueva-region-londres.html">Comentarios</a>
+
+
+        </article>
+        <article class="postbox clearfix h-entry">
+            <h1 class="p-name"><a href="posts/primeros-pasos-openstack.html" class="u-url">Primeros pasos con OpenStack</a></h1>
+            <div class="meta">
+                <small>
+                        por <span class="author">Javier Arellano</span>
+                    el <time class="published dt-published" datetime="2014-07-09T04:14:00+02:00">09/07/2014</time>
+                    
+                    en     <span itemprop="keywords">
+        <a class="tag p-category" href="tags/laboratorio.html"><span class="badge badge-info">Laboratorio</span></a>
+        <a class="tag p-category" href="tags/openstack.html"><span class="badge badge-info">OpenStack</span></a>
+    </span>
+
+                </small>
+            </div>
+            <div class="p-summary">
+                <p>Continuando con nuestro pequeño laboratorio OpenStack necesitamos crear las nuevas redes.</p>
+<pre class="code bash literal-block">
+<span class="nb">source</span> /root/keystonerc_demo
+neutron router-create router
+neutron net-create private
+neutron subnet-create private 10.0.0.0/24 --name private_subnet
+neutron router-interface-add router private_subnet
+neutron net-create public --router:external<span class="o">=</span>True
+neutron subnet-create public 192.168.0.0/24 --name public_subnet --enable_dhcp<span class="o">=</span>False --allocation-pool <span class="nv">start</span><span class="o">=</span>192.168.0.129,end<span class="o">=</span>192.168.0.254 --gateway<span class="o">=</span>192.168.0.1
+neutron router-gateway-set router public
+</pre>
+<p class="more"><a href="posts/primeros-pasos-openstack.html">Leer más…</a></p>
+            </div>
+                                <a href="posts/primeros-pasos-openstack.html#disqus_thread" data-disqus-identifier="cache/posts/2014-07-09-jare-primeros-pasos-openstack.html">Comentarios</a>
+
+
+        </article>
+        <article class="postbox clearfix h-entry">
+            <h1 class="p-name"><a href="posts/ssh-acceso-remoto-servidores.html" class="u-url">SSH: Acceso remoto a servidores</a></h1>
+            <div class="meta">
+                <small>
+                        por <span class="author">Eduardo Bellido Bellido</span>
+                    el <time class="published dt-published" datetime="2014-07-05T10:00:00+02:00">05/07/2014</time>
+                    
+                    en     <span itemprop="keywords">
+        <a class="tag p-category" href="tags/guias.html"><span class="badge badge-info">Guías</span></a>
+        <a class="tag p-category" href="tags/herramientas.html"><span class="badge badge-info">Herramientas</span></a>
+        <a class="tag p-category" href="tags/ssh.html"><span class="badge badge-info">SSH</span></a>
+    </span>
+
+                </small>
+            </div>
+            <div class="p-summary">
+                <p>Este artículo es el primero de una serie dedicada al protocolo <a class="reference external" href="https://es.wikipedia.org/wiki/Secure_Shell">SSH o Secure Shell</a>, un protocolo de acceso remoto a servidores altamente extendido en sistemas UN*X como GNU/Linux o FreeBSD. En los artículos trataremos de explicar el uso básico de este protocolo e iremos profundizando más en las capacidades avanzadas disponibles.</p>
+<p class="more"><a href="posts/ssh-acceso-remoto-servidores.html">Leer más…</a></p>
+            </div>
+                                <a href="posts/ssh-acceso-remoto-servidores.html#disqus_thread" data-disqus-identifier="cache/posts/2014-07-05-edubxb-ssh-acceso-remoto-servidores.html">Comentarios</a>
+
+
+        </article>
+        <article class="postbox clearfix h-entry">
+            <h1 class="p-name"><a href="posts/anuncio-NoSQL-matters-BCN-2014.html" class="u-url">Anuncio de la NoSQL matters BCN 2014</a></h1>
+            <div class="meta">
+                <small>
+                        por <span class="author">Ignasi Fosch</span>
+                    el <time class="published dt-published" datetime="2014-07-05T01:35:00+02:00">05/07/2014</time>
+                    
+                    en     <span itemprop="keywords">
+        <a class="tag p-category" href="tags/eventos.html"><span class="badge badge-info">Eventos</span></a>
+        <a class="tag p-category" href="tags/nosql.html"><span class="badge badge-info">NoSQL</span></a>
+    </span>
+
+                </small>
+            </div>
+            <div class="p-summary">
+                <img alt="NoSQL matters" class="align-left" src="images/logo_nosqlmatters.png">
+<p>¡<a class="reference external" href="http://2014.nosql-matters.org/cgn/">NoSQL matters</a> te da la bienvenida a la tercera edición de nuestra conferencia en Barcelona! El 21 y 22 de noviembre la hermosa <a class="reference external" href="http://www.uab-casaconvalescencia.org/en/index.php">Casa de la Convalescència</a> abrirá sus puertas a nuestros participantes hambrientos de aventura. ¡Acércate y disfruta de este gran evento con nosotros! Como conferencia consistente en un día de formación interactiva y otro día de charlas informativas, <a class="reference external" href="http://2014.nosql-matters.org/bcn/">NoSQL matters Barcelona</a> es el evento ideal para desarrolladores, arquitectos y <em>geeks</em>. Tendrás la oportunidad de contactar con los expertos líderes en NoSQL de todo el mundo, disfrutar de excitantes conversaciones o simplemente pasártelo en grande hackeando con otros participantes.</p>
+<p class="more"><a href="posts/anuncio-NoSQL-matters-BCN-2014.html">Leer más…</a></p>
+            </div>
+                                <a href="posts/anuncio-NoSQL-matters-BCN-2014.html#disqus_thread" data-disqus-identifier="cache/posts/2014-07-03-natx-NoSQL-matters-BCN-1.html">Comentarios</a>
+
+
+        </article>
+        <article class="postbox clearfix h-entry">
+            <h1 class="p-name"><a href="posts/laboratorio-pruebas.html" class="u-url">Laboratorio de pruebas</a></h1>
+            <div class="meta">
+                <small>
+                        por <span class="author">Javier Arellano</span>
+                    el <time class="published dt-published" datetime="2014-07-02T03:14:00+02:00">02/07/2014</time>
+                    
+                    en     <span itemprop="keywords">
+        <a class="tag p-category" href="tags/laboratorio.html"><span class="badge badge-info">Laboratorio</span></a>
+        <a class="tag p-category" href="tags/openstack.html"><span class="badge badge-info">OpenStack</span></a>
+    </span>
+
+                </small>
+            </div>
+            <div class="p-summary">
+                <p>Vamos a empezar una serie de artículos que en los que vamos a realizar instalaciones y pruebas, para poder empezar necesitaremos crear nuestro laboratorio, en este caso vamos a utilizar un ordenador físico, un pequeño servidor al cual le vamos a instalar un <a class="reference external" href="https://www.openstack.org">OpenStack</a> siguiendo el sistema de <a class="reference external" href="http://openstack.redhat.com">Packstack</a> de Redhat que permite instalar todos los componentes de OpenStack en una única máquina prácticamente sin dolor.</p>
+<p class="more"><a href="posts/laboratorio-pruebas.html">Leer más…</a></p>
+            </div>
+                                <a href="posts/laboratorio-pruebas.html#disqus_thread" data-disqus-identifier="cache/posts/2014-07-02-jare-laboratorio-pruebas.html">Comentarios</a>
+
+
+        </article>
+    <div>
+<ul class="pager">
+    <li class="previous">
+        <a href="index-17.html" rel="prev">Posts posteriores</a>
+    </li>
+    <li class="next">
+        <a href="index-15.html" rel="next">Posts anteriores</a>
+    </li>
+</ul>
+</div>
+
+                   <script>var disqus_shortname="edyo";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+            <script src="assets/js/mathjax.js" type="text/javascript"></script>
+
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

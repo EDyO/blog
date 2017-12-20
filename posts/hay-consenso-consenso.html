@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>¿Hay consenso en el consenso? | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/hay-consenso-consenso.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="¿Hay consenso en el consenso?">
+            <meta name="og:description" content="Imaginad un grupo de alumnos que toma apuntes en clase, anotando todo lo que un profesor dice.
+Este profesor, a menos que le indiquen lo contrario, no se detiene y asume que sus palabras llegan correc">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">¿Hay consenso en el consenso?</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="estamos%E2%80%94aqu%C3%AD-por-dinero.html" title="Todos estamos aquí por el dinero" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="amazon-linux-si-o-no.html" title="Amazon Linux, ¿sí o no?" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Daniel Aresté</span>
+                el <time class="published" datetime="2016-08-11T09:00:00+02:00">11/08/2016</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/algoritmos.html"><span class="badge badge-info">Algoritmos</span></a>
+        <a class="tag p-category" href="../tags/basicos.html"><span class="badge badge-info">Básicos</span></a>
+    </span>
+
+            </small>
+        </div>
+        <img alt="Students" class="align-right" src="https://cloud.githubusercontent.com/assets/5310624/17581465/55bed744-5fa6-11e6-93ee-f037e8f7b624.png" style="width: 125px; height: 125px;">
+<p>Imaginad un grupo de alumnos que toma apuntes en clase, anotando todo lo que un profesor dice.
+Este profesor, a menos que le indiquen lo contrario, no se detiene y asume que sus palabras llegan correctamente a todos los estudiantes.
+Si hay algún despistado, siempre puede preguntar al de al lado <em>("oye, ¿qué acaba de decir?")</em> sin interrumpir la clase.</p>
+<!-- TEASER_END -->
+<p>Pero ¿y si se despista más de uno a la vez? Siendo uno de los alumnos,
+¿cómo puedo estar seguro de que el compañero de al lado no estaba también en babia y me va a dar información errónea?
+Podría preguntarle a dos o tres compañeros, y me quedo con lo que diga la mayoría. Pero… ¿a cuántos es suficiente preguntar?
+¿Los elijo aleatoriamente, o me voy a preguntar a uno de los empollones? ¿Son cien por cien fiables los empollones?</p>
+<p>¿Qué ocurre si no hablamos de un despiste de dos o tres, sino de una moto ruidosa que ha pasado por la calle
+y que ha hecho que casi la mitad de alumnos no llegue a oír la última frase del profe?
+¿Hay alguna forma de ponernos de acuerdo mientras seguimos apuntando lo que el profe dice,
+o habrá que pedirle al profe que pare la clase un rato mientras comparamos nuestras notas y llegamos a un acuerdo?</p>
+<p>No parece trivial diseñar un sistema de organización (<strong>algoritmo</strong>) para garantizar que estos alumnos (<strong>nodos</strong>)
+dispongan en todo momento de unos apuntes (<strong>datos</strong>) consistentes y completos, ¿verdad? Especialmente ante despistes
+(<strong>caídas de nodos</strong>) o motos ruidosas (<strong>problemas de red</strong>). Más difícil aún si además tenemos que hacerlo sin interrumpir la clase
+(<strong>indisponibilidad de servicio</strong>).</p>
+<p>Lo que acabamos de presentar es conocido como el <a class="reference external" href="https://en.wikipedia.org/wiki/Consensus_(computer_science)">problema del consenso</a>, el aspecto fundamental a resolver
+en cualquier sistema distribuido que almacene información. De forma simplificada,
+el consenso se puede definir como la capacidad de una red de nodos no fiables de almacenar un estado común de forma fiable.
+Este problema quitó muchas horas de sueño a muchos investigadores, hasta que <a class="reference external" href="https://en.wikipedia.org/wiki/Leslie_Lamport">Leslie Lamport</a>, en 1989, presentó <a class="reference external" href="https://en.wikipedia.org/wiki/Paxos_(computer_science)">Paxos</a> y lo resolvió.</p>
+<div class="section" id="el-exito-indiscutible-de-paxos">
+<h2>El éxito indiscutible de Paxos...</h2>
+<p>Lamport desarrolló una familia de protocolos que resolvían definitivamente el problema del consenso.
+Digo definitivamente, porque Paxos no solamente parecía funcionar; estaba formalmente demostrado,
+prueba de la que otros algoritmos ad-hoc carecían.</p>
+<p>En 1998, después de publicarse con mucho éxito en la revista <a class="reference external" href="http://dl.acm.org/citation.cfm?id=279229">ACM Transactions on Computer Systems</a>,
+Paxos pasó a ser sinónimo de consenso: prácticamente cualquier sistema distribuido lo utilizaba,
+y las universidades lo empezaron a enseñar.</p>
+<p>Hoy en día, Paxos se usa en la arquitectura base de ciertos servicios comerciales (quizás os suene <strong>AWS</strong> o <strong>Azure</strong>)
+y conocidos proyectos open source (el sistema de storage distribuido <strong>Ceph</strong>, la base de datos orientada a grafos <strong>Neo4j</strong>,
+o el gestor de clusters <strong>Mesos</strong>, por poner algunos ejemplos). Google, aunque con ciertas modificaciones,
+lo usa como base para <strong>Chubby</strong>, su servicio de DLM (Distributed Lock Manager).</p>
+<p>Podríamos pensar que Paxos acabó con toda la investigación y desarrollo en el área del consenso.
+No hubiera sido extraño; al fin y al cabo, existiendo una solución definitiva a un problema, ¿qué más se necesita?</p>
+</div>
+<div class="section" id="y-su-oscuro-secretillo">
+<h2>... y su oscuro secretillo.</h2>
+<p>En 2013, Diego Ongaro y John Ousterhout, investigadores de Standford, presentaron un nuevo algoritmo de consenso llamado <a class="reference external" href="https://en.wikipedia.org/wiki/Raft_(computer_science)">Raft</a>.
+Al igual que Paxos, Raft solucionaba el consenso de forma completa y probada, pero...
+¿qué necesidad había de trabajar de nuevo sobre un problema ya resuelto?</p>
+<p>Ongaro y Ousterhout, con este trabajo, pretendían señalar al rey desnudo y sacar a la luz
+lo que ya en los círculos reducidos de investigadores era un secreto a voces:
+Paxos es condenadamente complejo y difícil de entender.
+Tanto, que se considera que solamente un puñado de investigadores en el mundo lo comprende en su totalidad.
+Los propios autores de Raft, en el <a class="reference external" href="https://raft.github.io/raft.pdf">paper</a> original, explican que solamente después de pasar un año investigando Paxos
+y tratando de implementarlo lograron comprenderlo completamente. Repito: unos tíos de Standford. Un año entero para entenderlo.</p>
+<p>La razón de ser de Raft fue la inteligibilidad. Los autores quisieron diseñar un algoritmo intuitivo, sencillo de entender
+y fácil de explicar, para así poder contribuir a que con él se construyeran sistemas más robustos.
+La idea subyacente es que si es fácil de entender, es más probable implementarlo sin errores.</p>
+<p>Parece que lo lograron; a pesar de su corta vida, Raft es ya muy exitoso.
+Como ejemplos de proyectos conocidos que lo implementen, tenemos <strong>etcd</strong> (un sistema de almacenamiento distribuido de pares clave-valor),
+<strong>Consul</strong> (una herramienta de Service Discovery) o <strong>OpenDaylight</strong> (un controlador de red SDN),
+lista a la que seguro se irán sumando muchos otros en el futuro.</p>
+<p>¿Cuál de los dos algoritmos va a ser el que monopolice el consenso en el futuro? Aunque parece que Raft arranca con fuerza,
+habrá que esperar y ver la tendencia. Lo que es seguro es que, cuando tratamos con el consenso, es mejor no inventar;
+el problema es tan complejo que es mejor acudir al mundo académico y usar algoritmos ya probados.
+El hecho de tratar de inventar tu propia solución al problema te puede llevar por derroteros bastante vergonzosos.
+O si no, que se lo pregunten a los desarrolladores de <strong>MongoDB</strong>
+(¿habéis oído hablar de problemas de integridad de datos en el producto? <a class="reference external" href="https://aphyr.com/posts/322-call-me-maybe-mongodb-stale-reads">Adivinad por qué</a>).</p>
+<p>Por último, os dejo con esta fantástica <a class="reference external" href="http://thesecretlivesofdata.com/raft/">animación interactiva</a> que muestra cómo funciona Raft y demuestra sus virtudes en términos
+de claridad y simplicidad. ¡Disfrutadla!</p>
+</div>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="estamos%E2%80%94aqu%C3%AD-por-dinero.html" rel="prev">Todos estamos aquí por el dinero</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="amazon-linux-si-o-no.html" rel="next">Amazon Linux, ¿sí o no?</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/hay-consenso-consenso.html",
+        disqus_title="\u00bfHay consenso en el consenso?",
+        disqus_identifier="cache/posts/2016-08-11-dareste-hay-consenso-consenso.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

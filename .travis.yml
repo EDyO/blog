@@ -1,0 +1,23 @@
+language: python
+python:
+  - "2.7"
+sudo: false
+virtualenv:
+  system_site_packages: true
+before_script:
+  - . $HOME/.nvm/nvm.sh
+  - nvm install stable
+  - nvm use stable
+  - npm install -g less@2.7.2
+  - nikola build
+script:
+  - git config --global user.email "travis@edyo.es"
+  - git config --global user.name "Travis for EDyO"
+  - git checkout --orphan gh-pages
+  - git rm -r --cached pages themes posts plugins files conf.py README.md pages requirements.txt
+  - rm -rf .doit.db.db cache/ node_modules/ conf.pyc
+  - cp -R output/* .
+  - echo "www.entredevyops.es" > CNAME
+  - git add .
+  - git commit -am "Publishing..."
+  - git push "https://${GH_TOKEN}@github.com/EDyO/blog.git" gh-pages -f

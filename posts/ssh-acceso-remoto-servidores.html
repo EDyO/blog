@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>SSH: Acceso remoto a servidores | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/ssh-acceso-remoto-servidores.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="SSH: Acceso remoto a servidores">
+            <meta name="og:description" content="Este artículo es el primero de una serie dedicada al protocolo SSH o Secure Shell, un protocolo de acceso remoto a servidores altamente extendido en sistemas UN*X como GNU/Linux o FreeBSD. En los artí">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">SSH: Acceso remoto a servidores</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="anuncio-NoSQL-matters-BCN-2014.html" title="Anuncio de la NoSQL matters BCN 2014" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="primeros-pasos-openstack.html" title="Primeros pasos con OpenStack" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Eduardo Bellido Bellido</span>
+                el <time class="published" datetime="2014-07-05T10:00:00+02:00">05/07/2014</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/guias.html"><span class="badge badge-info">Guías</span></a>
+        <a class="tag p-category" href="../tags/herramientas.html"><span class="badge badge-info">Herramientas</span></a>
+        <a class="tag p-category" href="../tags/ssh.html"><span class="badge badge-info">SSH</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p>Este artículo es el primero de una serie dedicada al protocolo <a class="reference external" href="https://es.wikipedia.org/wiki/Secure_Shell">SSH o Secure Shell</a>, un protocolo de acceso remoto a servidores altamente extendido en sistemas UN*X como GNU/Linux o FreeBSD. En los artículos trataremos de explicar el uso básico de este protocolo e iremos profundizando más en las capacidades avanzadas disponibles.</p>
+<!-- TEASER_END -->
+<p>Existen muchas implementaciones de clientes SSH, como <a class="reference external" href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a> (utilizado principalmente en entornos Windows), <a class="reference external" href="http://www.9bis.net/kitty/">KiTTY</a> (un <em>fork</em> del anterior) ambos <em>Software Libre</em>, también existen herramientas comerciales como <a class="reference external" href="http://www.vandyke.com/products/securecrt/">SecureCRT</a>, pero para estos artículos nos centraremos en <a class="reference external" href="http://www.openssh.com/">OpenSSH</a>, el cliente libre por excelencia para sistemas UN*X.</p>
+<div class="section" id="conectando">
+<h2>Conectando</h2>
+<p>Empecemos por el principio, y para el caso, nos conectaremos a un servidor, para hacerlo, usaremos el comando:</p>
+<pre class="code text literal-block">
+$ ssh example.com
+</pre>
+<p>en el caso que queramos conectar con un usuario distinto al local del equipo en el que nos encontremos, tenemos dos alternativas, mediante el <em>flag</em> <tt class="docutils literal"><span class="pre">-l</span></tt>:</p>
+<pre class="code text literal-block">
+$ ssh -l usuario example.com
+</pre>
+<p>o usando la notación <em>usuario@servidor</em>:</p>
+<pre class="code text literal-block">
+$ ssh usuario@example.com
+</pre>
+<p>el uso de una u otra forma es indiferente.</p>
+<p>Si es la primera vez que conectamos al servidor, SSH nos mostrará un mensaje como el siguiente:</p>
+<pre class="code text literal-block">
+The authenticity of host '192.168.1.151 (192.168.1.151)' can't be established.
+ECDSA key fingerprint is aa:ef:f9:b9:54:bb:d1:a0:f0:08:4e:a7:b2:68:71:bd.
+Are you sure you want to continue connecting (yes/no)?
+</pre>
+<p>advirtiéndonos que no podremos conectar hasta que aceptemos la clave de identificación del servidor, posteriormente esto ya no será necesario.</p>
+</div>
+<div class="section" id="usando-claves-de-autenticacion">
+<h2>Usando claves de autenticación</h2>
+<p>Yendo un paso más allá en lo que a autenticación se refiere, el protocolo SSH nos brinda la posibilidad de utilizar un juego de claves de autenticación, que mediante un algoritmo de <a class="reference external" href="https://es.wikipedia.org/wiki/Criptograf%C3%ADa_asim%C3%A9tric">cifrado asimétrico</a> (dispondremos de una clave privada y de otra pública) podremos autenticarnos de forma fácil y segura, siempre y cuando hayamos habilitado la clave pública en cada una de las máquinas a las que queramos acceder.</p>
+<div class="section" id="generacion-de-las-claves">
+<h3>Generación de las claves</h3>
+<p>Para generar las claves, el comando a utilizar es <tt class="docutils literal"><span class="pre">ssh-keygen</span></tt> de la siguiente forma:</p>
+<pre class="code text literal-block">
+$ ssh-keygen -t rsa -b 2048 -f .ssh/mi_clave -C "Mi clave SSH"
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in mi_clave.
+Your public key has been saved in mi_clave.pub.
+The key fingerprint is:
+d2:d1:8c:eb:22:75:b7:2f:12:07:e9:e1:6b:79:d8:35 Mi clave SSH
+The key's randomart image is:
++--[ RSA 2048]----+
+|                 |
+|         +       |
+|        o.o      |
+|       .+o       |
+|      ooSo.      |
+|     . ++...E    |
+|    . . .B.. .   |
+|     . .* +.     |
+|       . o ..    |
++-----------------+
+</pre>
+<p>Algunos <em>flags</em> son opcionales, como por ejemplo el <tt class="docutils literal"><span class="pre">-t</span></tt> para indicar el tipo de clave que queremos generar, en este caso hemos elegido <a class="reference external" href="https://es.wikipedia.org/wiki/RSA">RSA</a>, el <tt class="docutils literal"><span class="pre">-b</span></tt> para indicar de cuantos bits queremos que sea la clave (en la actualidad el mínimo recomendado para claves RSA es 2048), el <em>flag</em> <tt class="docutils literal"><span class="pre">-f</span></tt> nos permite indicar la ruta destino de las claves y su nombre, que por defecto es <tt class="docutils literal"><span class="pre">~/.ssh/id_rsa</span></tt> para el tipo RSA (la clave pública tendrá el mismo nombre pero con la extensión <em>.pub</em>), y nos queda el <em>flag</em> <tt class="docutils literal"><span class="pre">-C</span></tt> que nos permite añadir un comentario a la clave, que puede sernos útil para identificarla más fácilmente.</p>
+<p>En este caso, la clave privada ha sido generada sin contraseña (hemos pulsado la tecla <tt class="docutils literal">intro</tt> sin introducir ninguna), esto, en cierto modo, puede ser "arriesgado", ya que si por algún motivo alguien se hace con nuestra clave, podrá acceder sin restricciones a todos los servidores en los que hayamos habilitado dicha clave. Es por esto que una buena práctica es <strong>proteger siempre nuestras claves con contraseña</strong>, la cual será solicitada cada vez que accedamos a un servidor al que podamos acceder con clave. Esto también nos permite tener una única contraseña, la de nuestra clave, y no tener que recordar cada una de las claves de los usuarios remotos, en el caso que sean distintas.</p>
+</div>
+<div class="section" id="transferencia-de-las-claves-a-maquinas-remotas">
+<h3>Transferencia de las claves a máquinas remotas</h3>
+<p>Una vez tengamos las claves generadas para poder utilizaras en la autenticación es necesario añadir la clave pública en el servidor remoto, para hacerlo, un procedimiento podría ser el siguiente:</p>
+<pre class="code text literal-block">
+$ ssh -l usuario servidor
+</pre>
+<p>Ahora, ya dentro del servidor:</p>
+<pre class="code text literal-block">
+$ mkdir .ssh
+$ cat &gt;&gt; .ssh/authorized_keys
+</pre>
+<p>ahora debemos copiar el contenido del fichero que contiene la clave pública (<tt class="docutils literal"><span class="pre">~/.ssh/mi_clave.pub</span></tt>) y pegar el contenido en el terminal, luego, pulsar la combinación de teclas <tt class="docutils literal">Control+D</tt> para guardar el fichero. Por último, estableceremos los permisos adecuados para aumentar el nivel de seguridad:</p>
+<pre class="code text literal-block">
+$ chmod 0700 .ssh
+$ chmod 0600 .ssh/authorized_keys
+</pre>
+<p>Un detalle a tener en cuenta es que si el directorio <tt class="docutils literal">.ssh</tt> tiene unos permisos distintos a los anteriores, el servidor SSH no utilizará nuestras claves y nos solicitará nuestra contraseña hasta que lo hayamos corregido.</p>
+<p>Estos pasos pueden ser un tanto "tediosos" de realizar, sobretodo si es necesario crear el directorio y el fichero con las claves autorizadas, y más aún si queremos hacerlo en un número considerable de servidores, por eso, dentro del paquete de herramientas que vienen con el ciente OpenSSH tenemos uno que nos simplificará enormemente esta tarea, el comando <tt class="docutils literal"><span class="pre">ssh-copy-id</span></tt>:</p>
+<pre class="code text literal-block">
+$ ssh-copy-id -i .ssh/mi_clave.pub 192.168.1.151
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+user@192.168.1.151's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh '192.168.1.151'"
+and check to make sure that only the key(s) you wanted were added.
+</pre>
+<p>la ventaja de este método es que además de ser más rápido, dejará el directorio y el fichero creados con los permisos adecuados.</p>
+<p>En el caso que dispongamos de varias claves y no indiquemos una explícitamente con el <em>flag</em> <tt class="docutils literal"><span class="pre">-i</span></tt>, todas nuestras claves serán transferidas.</p>
+</div>
+<div class="section" id="simplificando-la-gestion-de-claves">
+<h3>Simplificando la gestión de claves</h3>
+<p>Dado que es una buena práctica proteger nuestra clave privada con una contraseña, el hecho de tener que introducirla cada vez que abrimos una sesión SSH no dista mucho de entrar directamente utilizando la contraseña de nuestra cuenta de usuario del servidor al que vayamos a acceder. Comprobémoslo:</p>
+<pre class="code text literal-block">
+$ ssh example.com -i .ssh/mi_clave
+Enter passphrase for key '.ssh/mi_clave':
+</pre>
+<p>Como no, esto también está solucionado, entrando ahora en juego el <em>ssh-agent</em>, que es un demonio que podemos ejecutar en cualquier momento con nuestro usuario (no se trata de un demonio de sistema), y que se encargará de "cachear" nuestras claves privadas para poder usarlas directamente sin necesidad de ir desbloqueándolas mediante contraseña, únicamente cuando hayamos instanciado el demonio y añadido la claves necesitaremos introducir las contraseñas para desbloquearlas, de modo que no será necesario hacerlo cada vez que hagamos una conexión a un servidor.</p>
+<p>Procedamos a usar el <em>ssh-agent</em>, primero, lo arrancamos:</p>
+<pre class="code text literal-block">
+$ ssh-agent
+SSH_AUTH_SOCK=/tmp/ssh-mj8Jg9EEtxCH/agent.9843; export SSH_AUTH_SOCK;
+SSH_AGENT_PID=9844; export SSH_AGENT_PID
+</pre>
+<p>añadimos nuestra clave:</p>
+<pre class="code text literal-block">
+$ ssh-add .ssh/mi_clave
+Enter passphrase for .ssh/mi_clave:
+Identity added: .ssh/mi_clave (.ssh/mi_clave)
+</pre>
+<p>opcionalmente podemos comprobar que la clave está añadida correctamente:</p>
+<pre class="code text literal-block">
+$ ssh-add -l
+d2:d1:8c:eb:22:75:b7:2f:12:07:e9:e1:6b:79:d8:35 .ssh/mi_clave (RSA)
+</pre>
+<p>realizado todo esto, ya podremos acceder fácilmente sin contraseñas a los servidores que queramos.</p>
+<p>Cabe comentar que, tanto Mac OS X en la aplicación <a class="reference external" href="https://en.wikipedia.org/wiki/Keychain_(Mac_OS)">Keychain</a>, como por ejemplo con el entorno de escritorio GNOME en la aplicación <a class="reference external" href="https://help.gnome.org/users/seahorse/stable/">Contraseñas y claves</a>, existe soporte de <em>ssh-agent</em>, simplificándonos la gestión de nuestras claves mediante interfaz gráfica, con lo que no necesitaremos del demonio que tiene con el cliente OpenSSH.</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusión</h2>
+<p>Con esto finalizamos esta entrega. Para los que quieran ir un paso por delante y no puedan esperar al siguiente artículo, siempre pueden acudir a la <a class="reference external" href="http://www.openssh.com/manual.html">documentación oficial de OpenSSH</a> o mirar las <em>man pages</em> correspondientes.</p>
+</div>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="anuncio-NoSQL-matters-BCN-2014.html" rel="prev">Anuncio de la NoSQL matters BCN 2014</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="primeros-pasos-openstack.html" rel="next">Primeros pasos con OpenStack</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/ssh-acceso-remoto-servidores.html",
+        disqus_title="SSH: Acceso remoto a servidores",
+        disqus_identifier="cache/posts/2014-07-05-edubxb-ssh-acceso-remoto-servidores.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

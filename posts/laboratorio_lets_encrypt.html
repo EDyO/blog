@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Probando Let's Encrypt: certificados SSL para todos! | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/laboratorio_lets_encrypt.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Probando Let's Encrypt: certificados SSL para todos!">
+            <meta name="og:description" content="El pasado día 03/12/2015 Let's Encrypt entró en fase beta pública. La idea con la cual nace este proyecto es la de ofrecer gratuitamente certificados X.509 para encriptación TLS a través de procesos a">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Probando Let's Encrypt: certificados SSL para todos!</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="OpenNebula_2015.html" title="Las conferencias OpenNebulaConf 2015" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="full_stack_engineer.html" title="Corred, insensatos!" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">David Acacio</span>
+                el <time class="published" datetime="2015-12-23T16:30:00+01:00">23/12/2015</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/laboratorio.html"><span class="badge badge-info">Laboratorio</span></a>
+        <a class="tag p-category" href="../tags/lets-encrypt.html"><span class="badge badge-info">Let's Encrypt</span></a>
+    </span>
+
+            </small>
+        </div>
+        <img alt="Lets Encrypt" class="align-left" src="https://cloud.githubusercontent.com/assets/2761032/12018247/c3198b70-ad60-11e5-8736-57bd99ad0ca3.png" style="width: 120px; height: 120px;">
+<p>El pasado día 03/12/2015 <a class="reference external" href="https://letsencrypt.org/">Let's Encrypt</a> entró en fase beta pública. La idea con la cual nace este proyecto es la de ofrecer <strong>gratuitamente</strong> certificados X.509 para encriptación TLS a través de procesos automáticos, eliminando los complejos y engorrosos procesos de creación, validación, firma, instalación y renovación de los certificados para la securización de sitios web.</p>
+<p>A continuación paso a detallar la prueba que hice.</p>
+<!-- TEASER_END -->
+<p>Comentar que la prueba la he realizado sobre mi VPS con CentOS 6.7, con Python 2.6 y ejecutando todos los pasos como root.</p>
+<p>Para realizar la instalación he seguido los pasos descritos descritos en la web de Let's Encrypt <a class="reference external" href="https://letsencrypt.org/howitworks/">https://letsencrypt.org/howitworks/</a></p>
+<p>Instalamos el cliente descargándolo directamente de Github:</p>
+<pre class="code bash literal-block">
+git clone https://github.com/letsencrypt/letsencrypt
+</pre>
+<p>A continuación ejecutamos el comando:</p>
+<pre class="code bash literal-block">
+./letsencrypt-auto --help
+</pre>
+<p>Que te instala de manera directa, si no los tienes, los siguientes paquetes</p>
+<pre class="code bash literal-block">
+Package git-1.7.1-3.el6_4.1.x86_64 already installed and latest version
+Package gcc-4.4.7-16.el6.x86_64 already installed and latest version
+Package dialog-1.1-9.20080819.1.el6.x86_64 already installed and latest version
+Package augeas-libs-1.0.0-10.el6.x86_64 already installed and latest version
+Package openssl-devel-1.0.1e-42.el6.x86_64 already installed and latest version
+Package libffi-devel-3.0.5-3.2.el6.x86_64 already installed and latest version
+Package redhat-rpm-config-9.0.3-44.el6.centos.noarch already installed and latest version
+Package ca-certificates-2015.2.4-65.0.1.el6_6.noarch already installed and latest version
+</pre>
+<p>Llegados a este punto intento solicitar el certificado de mi dominio:</p>
+<pre class="code bash literal-block">
+./letsencrypt-auto certonly --standalone -d acacio.cat
+</pre>
+<p>Pero en mi caso aparece el siguiente mensaje debido a que utilizo python 2.6</p>
+<pre class="code bash literal-block">
+WARNING: Python 2.6 support is very experimental at present...
+<span class="k">if </span>you would like to work on improving it, please ensure you have backups
+and <span class="k">then </span>run this script again with the --debug flag!
+</pre>
+<p>Tal como indica, volvemos a lanzar el comando con dicho flag y nos permite avanzar</p>
+<pre class="code bash literal-block">
+./letsencrypt-auto certonly --debug --standalone -d acacio.cat
+
+Updating letsencrypt and virtual environment dependencies.../root/.local/share/letsencrypt/lib/python2.6/site-packages/cryptography/__init__.py:25: DeprecationWarning: Python 2.6 is no longer supported by the Python core team, please upgrade your Python.
+  DeprecationWarning
+./root/.local/share/letsencrypt/lib/python2.6/site-packages/cryptography/__init__.py:25: DeprecationWarning: Python 2.6 is no longer supported by the Python core team, please upgrade your Python.
+  DeprecationWarning
+./root/.local/share/letsencrypt/lib/python2.6/site-packages/cryptography/__init__.py:25: DeprecationWarning: Python 2.6 is no longer supported by the Python core team, please upgrade your Python.
+  DeprecationWarning
+./root/.local/share/letsencrypt/lib/python2.6/site-packages/cryptography/__init__.py:25: DeprecationWarning: Python 2.6 is no longer supported by the Python core team, please upgrade your Python.
+  DeprecationWarning
+./root/.local/share/letsencrypt/lib/python2.6/site-packages/cryptography/__init__.py:25: DeprecationWarning: Python 2.6 is no longer supported by the Python core team, please upgrade your Python.
+  DeprecationWarning
+/root/.local/share/letsencrypt/lib/python2.6/site-packages/cryptography/__init__.py:25: DeprecationWarning: Python 2.6 is no longer supported by the Python core team, please upgrade your Python.
+  DeprecationWarning
+
+Running with virtualenv: /root/.local/share/letsencrypt/bin/letsencrypt certonly --debug --standalone -d acacio.cat
+/root/.local/share/letsencrypt/lib/python2.6/site-packages/cryptography/__init__.py:25: DeprecationWarning: Python 2.6 is no longer supported by the Python core team, please upgrade your Python.
+  DeprecationWarning
+Version: 1.1-20080819
+Version: 1.1-20080819
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at
+   /etc/letsencrypt/live/acacio.cat/fullchain.pem. Your cert will
+   expire on 2016-03-06. To obtain a new version of the certificate in
+   the future, simply run Let s Encrypt again.
+ - If like Let s Encrypt, please consider supporting our work by:
+
+   Donating to ISRG / Let s Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+</pre>
+<p>Durante la instalación nos aparece una ventana en ncurses que nos solicita una dirección de correo electrónico por si se tienen que ponder en contacto con nosotros.</p>
+<p>Al finalizar, tenemos los siguientes ficheros en máquina:</p>
+<p>La clave privada para el certificado:</p>
+<pre class="code bash literal-block">
+lrwxrwxrwx 1 root root 37 Dec  7 13:04 privkey.pem -&gt; ../../archive/acacio.cat/privkey.pem
+</pre>
+<p>Todos los certificados, incluyendo el certificado del servidor:</p>
+<pre class="code bash literal-block">
+lrwxrwxrwx 1 root root 39 Dec  7 13:04 fullchain.pem -&gt; ../../archive/acacio.cat/fullchain.pem
+</pre>
+<p>Todos los certificados, excluyendo el certificado del servidor:</p>
+<pre class="code bash literal-block">
+lrwxrwxrwx 1 root root 35 Dec  7 13:04 chain.pem -&gt; ../../archive/acacio.cat/chain.pem
+</pre>
+<p>El certificado del servidor:</p>
+<pre class="code bash literal-block">
+lrwxrwxrwx 1 root root 34 Dec  7 13:04 cert.pem -&gt; ../../archive/acacio.cat/cert.pem
+</pre>
+<p>En teoría ya tenemos certificados válidos para publicar con nuestro webserver. En mi caso estamos hablando de un nginx, que lo he configurado añadiendo las siguientes lineas:</p>
+<pre class="code nginx literal-block">
+<span class="k">listen</span>       <span class="n">5.79.75.212</span><span class="p">:</span><span class="mi">443</span><span class="p">;</span>
+<span class="k">ssl</span>    <span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_certificate</span>    <span class="s">/etc/letsencrypt/live/acacio.cat/cert.pem</span><span class="p">;</span>
+<span class="k">ssl_certificate_key</span>    <span class="s">/etc/letsencrypt/live/acacio.cat/privkey.pem</span><span class="p">;</span>
+<span class="k">server_name</span>  <span class="s">acacio.cat</span><span class="p">;</span>
+</pre>
+<p>Con esta configuración estamos securizando el dominio, pero si hacemos pruebas de acceso nos encontramos que hay clientes que no encuentran el certificado como confiable. Para que esto suceda, necesitamos enviar toda la cadena de certificados, por tal que el cliente sepa validarlo con la CA de IdenTrust. Por tanto, configuramos el servidor para tal efecto:</p>
+<pre class="code nginx literal-block">
+<span class="k">listen</span>       <span class="n">5.79.75.212</span><span class="p">:</span><span class="mi">443</span><span class="p">;</span>
+<span class="k">ssl</span>    <span class="no">on</span><span class="p">;</span>
+<span class="k">ssl_certificate</span>    <span class="s">/etc/letsencrypt/live/acacio.cat/fullchain.pem</span><span class="p">;</span>
+<span class="k">ssl_certificate_key</span>    <span class="s">/etc/letsencrypt/live/acacio.cat/privkey.pem</span><span class="p">;</span>
+<span class="k">server_name</span>  <span class="s">acacio.cat</span><span class="p">;</span>
+</pre>
+<p>Y listo! Ya tengo certificado para mi dominio personal <a class="reference external" href="https://acacio.cat">https://acacio.cat</a> .</p>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="OpenNebula_2015.html" rel="prev">Las conferencias OpenNebulaConf 2015</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="full_stack_engineer.html" rel="next">Corred, insensatos!</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/laboratorio_lets_encrypt.html",
+        disqus_title="Probando Let's Encrypt: certificados SSL para todos!",
+        disqus_identifier="cache/posts/2015-12-23-dacacio-letsencrypt.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

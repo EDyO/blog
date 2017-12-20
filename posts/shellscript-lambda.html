@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Ejecutando shell script en AWS Lambda | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/shellscript-lambda.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Ejecutando shell script en AWS Lambda">
+            <meta name="og:description" content="Llevo un tiempo dándole vueltas a migrar de mi servidor virtual privado hacia el cloud, en concreto hacia AWS, pero uno de los motivos que más me echan para atrás es todos los scripts, la mayor parte ">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Ejecutando shell script en AWS Lambda</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="true-stories.html" title="#TrueStories que no me contó ningún amigo" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="podcast-episodio-21.html" title="Podcast Episodio 21: Debate sobre el incidente en Gitlab" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">David Acacio</span>
+                el <time class="published" datetime="2017-02-20T23:25:00+01:00">20/02/2017</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/aws.html"><span class="badge badge-info">AWS</span></a>
+        <a class="tag p-category" href="../tags/lambda.html"><span class="badge badge-info">Lambda</span></a>
+        <a class="tag p-category" href="../tags/shell-script.html"><span class="badge badge-info">Shell script</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p><img src="https://cloud.githubusercontent.com/assets/2761032/22906212/da5bb104-f243-11e6-96e0-f7d9341c64a3.png" alt="AWS Lambda" class="align-right" height="200" width="200"></p>
+<p>Llevo un tiempo dándole vueltas a migrar de mi servidor virtual privado hacia el cloud, en concreto hacia AWS, pero uno de los motivos que más me echan para atrás es todos los scripts, la mayor parte en shell script, que tengo programados para ejecutarse diariamente en mi servidor y que realizan tareas de lo más útiles. De todos ellos destacaría el que tengo para que cada día me "recolecte" el libro electrónico gratuito que publica <a href="https://www.packtpub.com">Packtpub</a>. Pues bien, parece que este impedimento ha llegado a su fin, ya que utilizando un pequeño truco se pueden ejecutar shell scripts en Lambda.</p>
+<p>A continuación, os explico cómo he migrado mis shell scripts a Lambda.</p>
+<!-- TEASER_END -->
+
+<p>Si habéis trabajado un poco con Lambda ya sabréis que los lenguajes que admite son C#, Java 8, Edge Node y Python, pero en ningún caso permite la ejecución de shell script. Entonces, ¿cómo vamos a ejecutar nuestros scripts?</p>
+<p>Pues es bien sencillo, si no conocéis cómo funciona <a href="https://aws.amazon.com/es/lambda/">AWS Lambda</a> os diré que se basa en tecnología de contenedores, esto significa que el proceso cree que está corriendo en un servidor Linux de manera totalmente aislada, por tanto nada nos impide hacer llamadas al sistema operativo y ejecutar comandos como ls, cd, cp, etc... y como alguno de vosotros ya habrá deducido tampoco nos impide ejecutar ficheros .sh.</p>
+<p>La última parte que nos quedaría es ver cómo realizamos la subida de dichos ficheros, ya que no existe ningún mecanismo estándar de transferencia (ftp, sftp, etc...). Subiremos los ficheros junto los ficheros que contenga el código de la aplicación.</p>
+<p>Os voy a relatar cómo he realizado la instalación del script que cada día se conecta a Packtpub y "compra" el libro gratuito. El código lo podéis localizar en <a href="https://github.com/dacacioa/packtpub_lambda">este repositorio de Github</a> (importante: tendríais que adaptar el fichero .sh con vuestras credenciales de Packtpub, es decir, con vuestro email y contraseña)</p>
+<p>Dejadme que os cuente, a modo de guía paso a paso, cómo ejecutar scripts de manera planificada, emulando lo que haríamos editando el crontab de nuestro servidor Linux.</p>
+<ul>
+<li>Lo primero que haremos será descargar los ficheros del <a href="https://github.com/dacacioa/packtpub_lambda">repositorio de Github</a> que básicamente son:</li>
+</ul>
+<p>1.- El fichero .py que se encagará de ejecutar la llamada a sistema lanzado un shell para cargar el fichero .sh</p>
+<pre class="code literal-block">  <span class="nx">from</span> <span class="nx">__future__</span> <span class="kr">import</span> <span class="nx">print_function</span>
+
+  <span class="kr">import</span> <span class="nx">commands</span>
+
+  <span class="nx">def</span> <span class="nx">lambda_handler</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span><span class="o">:</span>
+      <span class="k">if</span> <span class="nx">commands</span><span class="p">.</span><span class="nx">getstatusoutput</span><span class="p">(</span><span class="s1">'sh ./packtpub.sh'</span><span class="p">)</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">:</span>
+          <span class="k">return</span> <span class="s2">"Ok, enjoy your free book"</span>
+</pre>
+
+
+<p>2.- El fichero .sh que ejecutará un curl en el contenedor donde se ejecute el código. Dicho curl ya está preparada para hacer login con las credenciales que indiquemos (email y contraseña), buscará el enlace del libro gratuito y simulará un click sobre dicho enalce.</p>
+<p><code>rm /tmp/user.cookie; curl -b /tmp/user.cookie https://www.packtpub.com$(curl -L -k -d 'email=your%40email.com&amp;password=yourpassword&amp;op=Login&amp;form_build_id=form-29b891c23331f6a85f502eef8b133303&amp;form_id=packt_user_login_form' -b /tmp/user.cookie -c /tmp/user.cookie 'https://www.packtpub.com/packt/offers/free-learning' | grep -i 'freelearning-claim' | awk '{print $2}' | cut -d'"' -f2)</code></p>
+<p>Es importante adaptar el fichero .sh con las credenciales correctas para que todo funcione. Una vez hecho esto generaremos un .zip que contenga los dos ficheros, el .py y el .sh.</p>
+<ul>
+<li>Nos conectaremos al panel de control de AWS y accederemos a la sección de Lambda:</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/22831006/00270f48-efa9-11e6-9475-840f0de06438.png" alt="AWS Lambda" class="align-center"></p>
+<ul>
+<li>Pulsamos el botón "Get Started Now" y aparecerá una pantalla para seleccionar plantilla. seleccionamos "Blank Function":</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/22831084/46ea81d0-efa9-11e6-9521-182ee85c93f2.png" alt="AWS Lambda Function" class="align-center"></p>
+<ul>
+<li>En la pantalla de configuración de Triggers hacemos click sobre el recuadro con el contorno discontinuo y seleccionamos el trigger "CloudWatch Events - Schedule":</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/22831096/57ca4c10-efa9-11e6-8a7d-ae37e800d8a0.png" alt="CloudWatch Events" class="align-center"></p>
+<ul>
+<li>En el apartado de configuración seleccionamos que solo se ejecute una vez al día:</li>
+<li>En el apartado "Rule Name" indicamos una vez al día.</li>
+<li>La descripción la dejamos por defecto.</li>
+<li>Confirmamos que la expresión de planificación es rate(1 day)</li>
+<li>Por último, seleccionamos la casilla de "Enable trigger" para activar la regla.</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/22831199/c5ac3126-efa9-11e6-9fb5-a3ff77b2da98.png" alt="Lambda Definition" class="align-center"></p>
+<ul>
+<li>En la siguiente pantalla configuraremos el entorno de ejecución de nuestra función:</li>
+<li>En el campo nombre insertaremos un nombre identificativo de la función.</li>
+<li>La descripción que creamos apropiada.</li>
+<li>Y en el campo "Runtime" seleccionaremos Python 2.7.</li>
+<li>Como "Code entry type" indicamos "Upload a .ZIP file" y subiremos el fichero .zip generado en el primer punto.</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/22834549/d0e6f754-efb5-11e6-9973-0c1428dde6ef.png" alt="AWS Lambda Code" class="align-center"></p>
+<ul>
+<li>En el apartado de "Lambda Function Handler" indicaremos lo siguiente:</li>
+<li>Insertaremos en el campo "Handler" el nombre del fichero .py más el nombre de la función que se tendrá que ejecutar. Si hemos seguido el procedimiento sin modificar ningún nombre de fichero tendríamos que indicar packtpub.lambda_handler .</li>
+<li>"Role": Seleccionamos "Choose a existing role".</li>
+<li>"Existing Role": "service-role/lamda_crontab_rol".</li>
+<li>En el apartado "Advenced settings" modificaremos el timeout a 5 segundos, ya que en ocasiones Packtpub tarda algo en responder y el timeout por defecto de 3 segundos se queda algo corto. Una vez hecha esta modificación podemos pulsar el botón de "Next".</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/22834612/080ed6c0-efb6-11e6-8695-9a9baa8e20dd.png" alt="AWS Lambda Code 2" class="align-center"></p>
+<ul>
+<li>Si todo ha funcionado correctamente tendríamos que ver una pantalla similar a esta:</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/22834666/2c5b6ac0-efb6-11e6-8eee-6185ae5d5457.png" alt="AWS Lambda Final" class="align-center"></p>
+<ul>
+<li>Pulsaremos el botón de "Test" para ver que funciona correctamente:</li>
+<li>Seleccionamos "Scheduled Event"</li>
+<li>Y pulsamos "Save and Test"</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/22908297/f2be5f80-f24d-11e6-899a-db037f1c581b.png" alt="AWS Test Event" width="80%" class="align-center"></p>
+<ul>
+<li>Nos tendría que aparecer una pantalla similar a la que pongo a continuación con el mensaje "Ok, enjoy your free book". Importante: Packtpub limita a un libro al día, por tanto, por muchas veces que lo ejecutemos sólo tendremos disponible en nuestra cuenta de Packtpub una copia del libro).</li>
+</ul>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/22908406/95b7f822-f24e-11e6-873a-11c441259996.png" alt="AWS Lambda TEst Ok" width="80%" class="align-center"></p>
+<p>¡Enhorabuena! Ya tenéis funcionando en Lambda una tarea programada que se ejecuta cada día y lanza un shell script para "recolectar" de manera automática los libros gratuitos de Packtpub. Y por cierto, todo a coste 0, ya que el consumo de ejecutar estos procesos es tan bajo que lo cubre la capa gratuita de AWS.</p>
+<p>Espero que os sea útil y lo extrapoléis a otros escenarios.</p>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="true-stories.html" rel="prev">#TrueStories que no me contó ningún amigo</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="podcast-episodio-21.html" rel="next">Podcast Episodio 21: Debate sobre el incidente en Gitlab</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/shellscript-lambda.html",
+        disqus_title="Ejecutando shell script en AWS Lambda",
+        disqus_identifier="cache/posts/2017-02-20-dacacio-shlambda.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

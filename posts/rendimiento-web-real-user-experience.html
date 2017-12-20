@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Rendimiento Web: Real User eXperience | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/rendimiento-web-real-user-experience.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Rendimiento Web: Real User eXperience">
+            <meta name="og:description" content="El pasado jueves tuvo lugar, en las oficinas que CanteraTech tiene en  Barcelona, un encuentro del grupo de Meetup de Barcelona Web Performance en el que Marc Loan habló sobre su proyecto Real User eX">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Rendimiento Web: Real User eXperience</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="EuroPython-2014-Berlin.html" title="EuroPython 2014 en Berlín" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="introduccion-openstack-midokura.html" title="Introducción a OpenStack en Midokura" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">Ignasi Fosch</span>
+                el <time class="published" datetime="2013-10-28T16:45:00+01:00">28/10/2013</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/eventos.html"><span class="badge badge-info">Eventos</span></a>
+        <a class="tag p-category" href="../tags/herramientas.html"><span class="badge badge-info">Herramientas</span></a>
+        <a class="tag p-category" href="../tags/rendimiento.html"><span class="badge badge-info">Rendimiento</span></a>
+    </span>
+
+            </small>
+        </div>
+        <a class="reference external image-reference" href="http://www.flickr.com/photos/wwarby/"><img alt="Medición de tiempos (Foto: William Warby)" class="border align-left" src="../images/performance.jpg" style="width: 180px; height: 135px;"></a>
+<p>El pasado jueves tuvo lugar, en las oficinas que <a class="reference external" href="http://www.cantera-tech.com/es/">CanteraTech</a> tiene en  Barcelona, un encuentro del grupo de <a class="reference external" href="http://www.meetup.com/">Meetup</a> de <a class="reference external" href="http://www.meetup.com/Barcelona-Web-Performance-Group/">Barcelona Web Performance</a> en el que <a class="reference external" href="http://marcloan.cat/">Marc Loan</a> habló sobre su proyecto <em>Real User eXperience</em>, o RUX. Desarrollado y utilizado desde 2008 para detectar y analizar los problemas que los usuarios puedan experimentar durante la navegación de un sitio web, incluso cuando éstos no llamen al servicio de atención al cliente. Este proyecto, además, se convirtió en el proyecto de fin de carrera de Marc.</p>
+<!-- TEASER_END -->
+<div class="section" id="rux-real-user-experience">
+<h2>RUX: Real User eXperience</h2>
+<p>Como explicó Marc, el proyecto se realizó para poder atender problemas que los usuarios detectaban en la página web, sin que percibieran el problema, a no ser que el usuario llamaba a su servicio de atención.
+Este proyecto se inició en 2008 para aportar:</p>
+<ul class="simple">
+<li>Control en tiempo real de las incidencias.</li>
+<li>Mejoras en la calidad de la aplicación.</li>
+<li>Reducción del tiempo de investigacion de los errores, al recibirlo todo en el momento de producirse, antes de que los usuarios llamasen.</li>
+<li>Recuperación de la información útil para los desarrolladores.</li>
+<li>Análisis de la estadística de los errores para encontrar tendencias.</li>
+<li>Registro de la actividad de los usuarios, permitiendo detectar el entorno que causa el error.</li>
+<li>Diagnóstico del funcionamiento de los servicios. Es una especie de web status.</li>
+</ul>
+<p>En su entorno, el contenido se sirve desde una granja de servidores web. Estos servidores registran todo en un servidor centralizado utilizando el servicio <tt class="docutils literal">syslog</tt>. Sobre los registros de las peticiones y de los errores, que se actualizan tras cada petición, se ejecuta un proceso <em>ETL</em> que analiza su contenido y lo carga en una base de datos. Esta base de datos, que tiene un diseño ROLAP para permitir crear cubos de análisis OLAP, es consultada por el sistema que crearon para obtener la información que necesita.</p>
+</div>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="EuroPython-2014-Berlin.html" rel="prev">EuroPython 2014 en Berlín</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="introduccion-openstack-midokura.html" rel="next">Introducción a OpenStack en Midokura</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/rendimiento-web-real-user-experience.html",
+        disqus_title="Rendimiento Web: Real User eXperience",
+        disqus_identifier="cache/posts/2013-10-24-natx-Real-User-Experience.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

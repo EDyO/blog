@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Entre Dev Y Ops">
+    <title>Habilitar la autenticación en dos pasos para SSH con Google Authenticator | Entre Dev Y Ops</title>
+    
+        <link href="../assets/css/rst.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/code.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+        <link href="../assets/css/edyo.css" rel="stylesheet" type="text/css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="og:url" content="http://www.entredevyops.es/posts/ssh-2FA.html">
+            <meta name="twitter:site:id" content="370552857">
+        <meta name="og:title" content="Habilitar la autenticación en dos pasos para SSH con Google Authentica">
+            <meta name="og:description" content="Tal como comenté en mi pasado artículo en este mismo blog hace poco detecté que alguna mala persona estaba intentando acceder a mi servidor privado mediante fuerza bruta por SSH. En el artículo de hoy">
+
+    
+</head>
+<body>
+
+<div id="wrap">
+
+    <!-- Menubar -->
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://www.entredevyops.es/">Entre Dev Y Ops</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right" id="main-navbar">
+                                    <li>
+<a href="../tags/index.html"><i class="fa fa-tags"></i> Etiquetas</a>
+                </li>
+<li>
+<a href="../archive.html"><i class="fa fa-archive"></i> Archivo</a>
+                </li>
+<li>
+<a href="../podcast.html"><i class="fa fa-microphone"></i> Podcast</a>
+                </li>
+<li>
+<a href="../acerca-de.html"><i class="fa fa-info-circle"></i> Acerca de...</a>
+
+                        </li>
+<li id="search-button"><a href="#" class="fa fa-search"></a></li>
+                        </ul>
+<form method="get" role="search" id="search" action="https://google.es/search" class="nav navbar-form">
+<input type="hidden" name="as_sitesearch" value="http://www.entredevyops.es/">
+<input type="text" name="q" maxlength="255" placeholder="Buscar..." class="form-control">
+<input type="submit" value="Buscar">
+</form>
+                
+            </div>
+<!-- /.navbar-collapse -->
+        </div>
+    </nav>
+
+    <!-- End of Menubar -->
+
+    <div class="container">
+        <div class="body-content">
+            <!--Body content-->
+    <article class="postbox clearfix">
+            <h1 class="p-name" itemprop="headline name">Habilitar la autenticación en dos pasos para SSH con Google Authenticator</h1>
+
+            <ul class="pager">
+        <li class="previous">
+        <a href="que-sabes-del-cloud.html" title="¿Qué sabes del Cloud?" rel="prev">Post anterior</a>
+        </li>
+        <li class="next">
+            <a href="podcast-episodio-20.html" title="Podcast Episodio 20: Entrevista a David Monreal" rel="next">Siguiente post</a>
+        </li>
+    </ul>
+
+        <div class="meta">
+            <small>
+                por <span class="author">David Acacio</span>
+                el <time class="published" datetime="2016-11-23T00:25:00+01:00">23/11/2016</time>
+                
+                en     <span itemprop="keywords">
+        <a class="tag p-category" href="../tags/2fa.html"><span class="badge badge-info">2FA</span></a>
+        <a class="tag p-category" href="../tags/google-authenticator.html"><span class="badge badge-info">Google Authenticator</span></a>
+        <a class="tag p-category" href="../tags/ssh.html"><span class="badge badge-info">SSH</span></a>
+    </span>
+
+            </small>
+        </div>
+        <p><img src="https://cloud.githubusercontent.com/assets/2761032/19434535/4c54eb54-9466-11e6-8a7b-4aa4459dc02f.png" alt="Ssh Google Authenticator" class="align-right" height="150" width="150"></p>
+<p>Tal como comenté en mi <a href="http://www.entredevyops.es/posts/fail2ban-ssh.html">pasado artículo en este mismo blog</a> hace poco detecté que alguna mala persona estaba intentando acceder a mi servidor privado mediante fuerza bruta por SSH. En el artículo de hoy vamos a explicar cómo activar el 2FA (doble factor de autenticación) para acceso SSH con <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">Google Authenticator</a>. </p>
+<!-- TEASER_END -->
+
+<p>La demostración la vamos a realizar sobre una máquina virtual en mi PC basada en Ubuntu Server 16.04.01.</p>
+<p>Lo primero que vamos a necesitar es la instalación del paquete que habilite en el PAM (el sistema que gestiona la autentificación de la máquina) el módulo de Google Authenticator:</p>
+<pre class="code literal-block"><span class="n">root</span><span class="err">@</span><span class="n">ubuntu</span><span class="o">:~</span><span class="err">#</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">libpam</span><span class="o">-</span><span class="n">google</span><span class="o">-</span><span class="n">authenticator</span>
+</pre>
+
+
+<p>Y posteriormente añadir la siguiente línea en el fichero /etc/pam.d/sshd para que se habilite dicho módulo en el servicio SSH:</p>
+<pre class="code literal-block">auth required pam_google_authenticator.so
+</pre>
+
+
+<p>Y el fichero /etc/ssh/sshd_config modificar el siguiente parámetro de 'no' a 'yes'</p>
+<pre class="code literal-block">ChallengeResponseAuthentication yes
+</pre>
+
+
+<p>Y realizar un reinicio del servicio de SSH:</p>
+<pre class="code literal-block">root@ubuntu:~# sudo service sshd restart
+</pre>
+
+
+<p>A partir de ahora cualquier acceso SSH requerirá de código de verificación.</p>
+<p>Perfecto, ahora que ya tenemos nuestro sistema para que el SSH solicite la doble autentificación, el siguiente paso es configurar los usuarios que van a necesitar acceder. Para configurarlo necesitamos tener a mano el dispositivo el cual tengamos instalado el Google Authenticator, mi caso mi teléfono móvil Android.</p>
+<p>Cambiamos al usuario en el que queremos activar la doble autenticación (en este caso mitch) y ejecutamos el siguiente comando:</p>
+<pre class="code literal-block">mitch@ubuntu:~<span class="nv">$ </span>google-authenticator
+
+Do you want authentication tokens to be <span class="nb">time</span>-based <span class="o">(</span>y/n<span class="o">)</span> y
+https://www.google.com/chart?chs<span class="o">=</span>200x200&amp;chld<span class="o">=</span>M|0&amp;cht<span class="o">=</span>qr&amp;chl<span class="o">=</span>otpauth://totp/mitch@ubuntu%3Fsecret%3D3HXRVMUFOOTJP3OL
+</pre>
+
+
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/19431270/1c056f0e-9458-11e6-83d3-4092efbe9dfc.JPG" class="align-center" height="400" width="400"></p>
+<pre class="code literal-block">Your new secret key is: 3HXRVMUFOOTJP3OL
+Your verification code is 561744
+Your emergency scratch codes are:
+  54523107
+  83743686
+  46350483
+  10209811
+  51273874
+
+Do you want me to update your <span class="s2">"/home/mitch/.google_authenticator"</span> file <span class="o">(</span>y/n<span class="o">)</span> y
+
+Do you want to disallow multiple uses of the same authentication
+token? This restricts you to one login about every 30s, but it increases
+your chances to notice or even prevent man-in-the-middle attacks <span class="o">(</span>y/n<span class="o">)</span> y
+
+By default, tokens are good <span class="k">for </span>30 seconds and in order to compensate <span class="k">for</span>
+possible <span class="nb">time</span>-skew between the client and the server, we allow an extra
+token before and after the current time. If you experience problems with poor
+<span class="nb">time </span>synchronization, you can increase the window from its default
+size of 1:30min to about 4min. Do you want to <span class="k">do </span>so <span class="o">(</span>y/n<span class="o">)</span> y
+
+If the computer that you are logging into isn<span class="err">'</span>t hardened against brute-force
+login attempts, you can <span class="nb">enable </span>rate-limiting <span class="k">for </span>the authentication module.
+By default, this limits attackers to no more than 3 login attempts every 30s.
+Do you want to <span class="nb">enable </span>rate-limiting <span class="o">(</span>y/n<span class="o">)</span> y
+</pre>
+
+
+<p>En este punto tenemos que escanear el código de barras (o introducir los códigos facilitados) y nos aparecerá una nueva entrada en nuestra aplicación móvil:</p>
+<p><img src="https://cloud.githubusercontent.com/assets/2761032/20249685/cdccac0a-a9fe-11e6-9cd4-09cdf981ec34.png" class="align-center" height="300" width="200"></p>
+<p>Como podéis observar aparece una entrada para mitch@ubuntu, que es la correspondiente a mi máquina. La otra entrada que aparece es la relativa a mi servicio de Dropbox.</p>
+<p>Llegados a este punto ya estamos en disposición de probar si funciona. Abrimos un nuevo terminal y ejecutamos SSH contra nuestro servidor e introducimos usuario y password:</p>
+<pre class="code literal-block">login as: mitch
+Using keyboard-interactive authentication.
+Password:
+Using keyboard-interactive authentication.
+Verification code:
+</pre>
+
+
+<p>Después de solicitarme el password me aparece una nueva línea que me solicita el código de verificación, que es el que tendremos que consultar en nuestra aplicación. Una vez introducido podremos acceder al sistema sin problema. </p>
+<p>Por último un pequeño consejo: si queréis activar el 2FA de manera gradual en el sistema podéis añadir la opción nullok cuando configuréis el PAM en el fichero /etc/pam.d/sshd (recordad reiniciar el sshd al realizar la modificación).</p>
+<pre class="code literal-block">auth required pam_google_authenticator.so nullok
+</pre>
+
+
+<p>De esta manera solo activará la configuración a aquellos usuarios que hayan ejecutado el proceso de configuración.</p>
+<p>Espero que os sea útil y podéis hacerme llegar vuestras dudas/opiniones a través los comentarios del post.</p>
+    </article>
+        <div class="pager row">
+        <div class="previous col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Post anterior</div>
+            <a href="que-sabes-del-cloud.html" rel="prev">¿Qué sabes del Cloud?</a>
+        </div>
+        <div class="next col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div>Siguiente post</div>
+            <a href="podcast-episodio-20.html" rel="next">Podcast Episodio 20: Entrevista a David Monreal</a>
+        </div>
+    </div>
+
+                    <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="edyo",
+            disqus_url="http://www.entredevyops.es/posts/ssh-2FA.html",
+        disqus_title="Habilitar la autenticaci\u00f3n en dos pasos para SSH con Google Authenticator",
+        disqus_identifier="cache/posts/2016-11-23-dacacio-ssh-2FA.html",
+        disqus_config = function () {
+            this.language = "es_ES";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>JavaScript debe estar activado para ver los <a href="http://disqus.com/?ref_noscript" rel="nofollow">comentarios con Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink" rel="nofollow">Comentarios con <span class="logo-disqus">Disqus</span></a>
+
+
+    
+            <!--End of body content-->
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        Suscríbete a nuestro <a href="http://www.entredevyops.es/rss.xml">RSS <i class="fa fa-rss"></i></a> o síguenos en <a href="https://twitter.com/entredevyops">Twitter <i class="fa fa-twitter"></i></a><br>© 2017 Entre Dev Y Ops por los <a href="http://www.entredevyops.es/acerca-de.html#authors">autores</a> bajo <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES">Licencia <img alt="Licencia Creative Commons" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" height="15px" width="80px"></a> — Powered by <a href="http://getnikola.com">Nikola</a>
+    </div>
+</footer>
+
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+        <script src="../assets/js/jquery.colorbox-min.js" type="text/javascript"></script>
+
+    <script>
+        $( "#search-button" ).click(toggle_search);
+        function toggle_search() {
+            $('#main-navbar').children().each(
+                function() {
+                    if ($(this).attr('id') != 'search-button') {
+                        console.log($(this).attr('id'));
+                        $(this).toggle();
+                    };
+                }
+            );
+            $( "#search" ).toggle();
+        }
+    </script>
+	
+
+    <script type="text/javascript">jQuery("a.image-reference").colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-25613214-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
